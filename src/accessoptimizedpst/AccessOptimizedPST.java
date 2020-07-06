@@ -48,7 +48,7 @@ public class AccessOptimizedPST {
         
         PointerPST aopsTree = new PointerPST(nodes);
         
-        String fileName = "C:\\Users\\flipp\\Documents\\Computer Science\\Research\\AOPST\\test_results.xlsx";
+        String fileName = "test_results.xlsx";
         File file = new File(fileName);
         FileInputStream fis = new FileInputStream(file);
         XSSFWorkbook workbook = new XSSFWorkbook(fis);
@@ -71,7 +71,7 @@ public class AccessOptimizedPST {
         XSSFCell cell3 = row.createCell(3);
         cell3.setCellValue("Difference (A - S)");
         
-        String queryFileName = "C:\\Users\\flipp\\Documents\\Computer Science\\Research\\AOPST\\population.txt";
+        String queryFileName = "population.txt";
         File queryFile = new File(queryFileName);
         
 //        For character tree
