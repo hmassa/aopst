@@ -28,17 +28,25 @@ public class AccessOptimizedPST {
      * @throws java.io.IOException
      */
     public static void main(String[] args) throws IOException{
+//        ArrayList<Character> characters = new ArrayList<>();
+//        for (int i = 0; i < 26; i++)
+//            characters.add((char)(i + 97));
+
+        ArrayList<Integer> ints = new ArrayList<>();
+        for (int i = 1; i < 10; i++)
+            ints.add(i);
+        
+        Collections.shuffle(ints);
+        
+        SplayTree splayTree = new SplayTree();
         ArrayList<PointerPSTNode> nodes = new ArrayList<>();
         
-//        char[] alphabet = "abcdefghijklmnopqrstuvwxyz".toCharArray();
-//        for (char c : alphabet)
-//            nodes.add(new PointerPSTNode(c, 0));
-
-        for (int i = 1; i < 10; i++){
+        for (Integer i : ints){
+            splayTree.insert(i);
             nodes.add(new PointerPSTNode(i, 0));
         }
         
-        PointerPST tree = new PointerPST(nodes);
+        PointerPST aopsTree = new PointerPST(nodes);
         
         String fileName = "C:\\Users\\flipp\\Documents\\Computer Science\\Research\\AOPST\\test_results.xlsx";
         File file = new File(fileName);
@@ -58,27 +66,36 @@ public class AccessOptimizedPST {
         cell0.setCellValue("Search Key");
         XSSFCell cell1 = row.createCell(1);
         cell1.setCellValue("AOPST");
+        XSSFCell cell2 = row.createCell(2);
+        cell2.setCellValue("Splay Tree");
+        XSSFCell cell3 = row.createCell(3);
+        cell3.setCellValue("Difference (A - S)");
         
-//        String queryFileName = "C:\\Users\\flipp\\Documents\\Computer Science\\Research\\AOPST\\character.txt";
         String queryFileName = "C:\\Users\\flipp\\Documents\\Computer Science\\Research\\AOPST\\population.txt";
         File queryFile = new File(queryFileName);
         
-        // For character tree
+//        For character tree
 //        FileReader reader = new FileReader(queryFile);
 //        int content, count = 1;
 //        while ((content = reader.read()) != -1){
 //            char searchKey = Character.toLowerCase((char)content);
-//            int comparisons = tree.aopstSearch(searchKey);
-//            if (comparisons != 0){
+//            int aopstComps = aopsTree.aopstSearch(searchKey);
+//            int splayComps = splayTree.find(searchKey);
+//            if (aopstComps != 0){
 //                row = sheet.createRow(count);
+//                count++;
 //                cell0 = row.createCell(0);
 //                cell0.setCellValue(String.valueOf(searchKey));
 //                cell1 = row.createCell(1);
-//                cell1.setCellValue(comparisons);
-//                count++;
+//                cell1.setCellValue(aopstComps);
+//                cell2 = row.createCell(2);
+//                cell2.setCellValue(splayComps);
+//                cell3 = row.createCell(3);
+//                cell3.setCellFormula("B" + count + "-C" + count);
 //            }
 //        }
         
+//        For Benford distribution of country populations
         Scanner sc = new Scanner(queryFile);
         ArrayList<Integer> queries = new ArrayList<>();
         
@@ -90,14 +107,25 @@ public class AccessOptimizedPST {
         Collections.shuffle(queries);
         int count = 1;
         for (Integer query : queries) {
-            int comparisons = tree.aopstSearch(query);
-            row = sheet.getRow(count);
+            int aopstComps = aopsTree.aopstSearch(query);
+            int splayComps = splayTree.find(query);
+            row = sheet.createRow(count);
+            count++;
             cell0 = row.createCell(0);
             cell0.setCellValue(query);
-            cell1 = row.createCell(3);
-            cell1.setCellFormula("B" + count + "-C" + count);
-            count++;
+            cell1 = row.createCell(1);
+            cell1.setCellValue(aopstComps);
+            cell2 = row.createCell(2);
+            cell2.setCellValue(splayComps);
+            cell3 = row.createCell(3);
+            cell3.setCellFormula("B" + count + "-C" + count);    
         }
+        
+        row = sheet.createRow(count);
+        cell2 = row.createCell(2);
+        cell2.setCellValue("Total:");
+        cell3 = row.createCell(3);
+        cell3.setCellFormula("SUM(D2:D" + count +")");
         
         FileOutputStream out = new FileOutputStream(file);
         workbook.write(out);
