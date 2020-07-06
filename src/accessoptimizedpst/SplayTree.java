@@ -1,9 +1,7 @@
 package accessoptimizedpst;
 
-public class SplayTree
-{
+public class SplayTree implements Tree {
     private Node root;
-
     public SplayTree() {
         root = null;
     }

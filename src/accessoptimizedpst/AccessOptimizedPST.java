@@ -79,7 +79,7 @@ public class AccessOptimizedPST {
 //        int content, count = 1;
 //        while ((content = reader.read()) != -1){
 //            char searchKey = Character.toLowerCase((char)content);
-//            int aopstComps = aopsTree.aopstSearch(searchKey);
+//            int aopstComps = aopsTree.find(searchKey);
 //            int splayComps = splayTree.find(searchKey);
 //            if (aopstComps != 0){
 //                row = sheet.createRow(count);
@@ -107,7 +107,7 @@ public class AccessOptimizedPST {
         Collections.shuffle(queries);
         int count = 1;
         for (Integer query : queries) {
-            int aopstComps = aopsTree.aopstSearch(query);
+            int aopstComps = aopsTree.find(query);
             int splayComps = splayTree.find(query);
             row = sheet.createRow(count);
             count++;

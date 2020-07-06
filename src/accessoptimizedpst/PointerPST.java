@@ -24,7 +24,7 @@ package accessoptimizedpst;
 import static java.lang.Math.floor;
 import java.util.*;
 
-public class PointerPST {
+public class PointerPST  implements Tree{
     private PointerPSTNode root;
     
     public PointerPST(ArrayList<PointerPSTNode> points) {
@@ -99,7 +99,7 @@ public class PointerPST {
 *   Search for specified X value                                              *
 *                                                                             *
 ******************************************************************************/
-    public int aopstSearch(Comparable xVal){
+    public int find(Comparable xVal){
         int count = 0;
 	return aopstSearch(xVal, root, count);
     }
