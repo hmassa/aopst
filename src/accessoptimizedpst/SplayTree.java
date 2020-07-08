@@ -1,3 +1,7 @@
+/* Adapted from code written by Danny Sleator <sleator@cs.cmu.edu> and found at
+*  https://www.link.cs.cmu.edu/splay/download/SplayTree.java 
+*/
+
 package accessoptimizedpst;
 
 public class SplayTree implements Tree {

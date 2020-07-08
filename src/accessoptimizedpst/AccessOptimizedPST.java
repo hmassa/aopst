@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package accessoptimizedpst;
 
 import java.util.ArrayList;
@@ -17,33 +12,36 @@ import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 /**
  *
  * @author flipp
  */
-public class AccessOptimizedPST {
-
-    /**
-     * @param args the command line arguments
-     * @throws java.io.IOException
-     */
+public class AccessOptimizedPST{
     public static void main(String[] args) throws IOException{
-//        ArrayList<Character> characters = new ArrayList<>();
-//        for (int i = 0; i < 26; i++)
-//            characters.add((char)(i + 97));
-
-        ArrayList<Integer> ints = new ArrayList<>();
-        for (int i = 1; i < 10; i++)
-            ints.add(i);
+        ArrayList<Character> characters = new ArrayList<>();
+        for (int i = 0; i < 26; i++)
+            characters.add((char)(i + 97));
         
-        Collections.shuffle(ints);
+        Collections.shuffle(characters);
+
+//        ArrayList<Integer> ints = new ArrayList<>();
+//        for (int i = 1; i < 10; i++)
+//            ints.add(i);
+        
+//        Collections.shuffle(ints);
         
         SplayTree splayTree = new SplayTree();
         ArrayList<PointerPSTNode> nodes = new ArrayList<>();
         
-        for (Integer i : ints){
-            splayTree.insert(i);
-            nodes.add(new PointerPSTNode(i, 0));
+//        for (Integer i : ints){
+//            splayTree.insert(i);
+//            nodes.add(new PointerPSTNode(i, 0));
+//        }
+
+        for (Character c : characters){
+            splayTree.insert(c);
+            nodes.add(new PointerPSTNode(c, 0));
         }
         
         PointerPST aopsTree = new PointerPST(nodes);
@@ -53,8 +51,9 @@ public class AccessOptimizedPST {
         FileInputStream fis = new FileInputStream(file);
         XSSFWorkbook workbook = new XSSFWorkbook(fis);
         
-//        String sheetName = "Character";
-        String sheetName = "Population";
+//        String sheetName = "Lyrics";
+        String sheetName = "Poem";
+//        String sheetName = "Population";
         XSSFSheet sheet = workbook.getSheet(sheetName);
         if (sheet == null){
             sheet = workbook.createSheet(sheetName);
@@ -71,55 +70,57 @@ public class AccessOptimizedPST {
         XSSFCell cell3 = row.createCell(3);
         cell3.setCellValue("Difference (A - S)");
         
-        String queryFileName = "population.txt";
+        //Strng queryFileName = "lyrics.txt";
+        //String queryFileName = "population.txt";
+        String queryFileName = "poem.txt";
         File queryFile = new File(queryFileName);
         
 //        For character tree
-//        FileReader reader = new FileReader(queryFile);
-//        int content, count = 1;
-//        while ((content = reader.read()) != -1){
-//            char searchKey = Character.toLowerCase((char)content);
-//            int aopstComps = aopsTree.find(searchKey);
-//            int splayComps = splayTree.find(searchKey);
-//            if (aopstComps != 0){
-//                row = sheet.createRow(count);
-//                count++;
-//                cell0 = row.createCell(0);
-//                cell0.setCellValue(String.valueOf(searchKey));
-//                cell1 = row.createCell(1);
-//                cell1.setCellValue(aopstComps);
-//                cell2 = row.createCell(2);
-//                cell2.setCellValue(splayComps);
-//                cell3 = row.createCell(3);
-//                cell3.setCellFormula("B" + count + "-C" + count);
-//            }
-//        }
+        FileReader reader = new FileReader(queryFile);
+        int content, count = 1;
+        while ((content = reader.read()) != -1){
+            char searchKey = Character.toLowerCase((char)content);
+            int aopstComps = aopsTree.find(searchKey);
+            int splayComps = splayTree.find(searchKey);
+            if (aopstComps != 0){
+                row = sheet.createRow(count);
+                count++;
+                cell0 = row.createCell(0);
+                cell0.setCellValue(String.valueOf(searchKey));
+                cell1 = row.createCell(1);
+                cell1.setCellValue(aopstComps);
+                cell2 = row.createCell(2);
+                cell2.setCellValue(splayComps);
+                cell3 = row.createCell(3);
+                cell3.setCellFormula("B" + count + "-C" + count);
+            }
+        }
         
 //        For Benford distribution of country populations
-        Scanner sc = new Scanner(queryFile);
-        ArrayList<Integer> queries = new ArrayList<>();
-        
-        while (sc.hasNextLine()){
-            char[] chars = sc.nextLine().toCharArray();
-            queries.add(Character.getNumericValue(chars[0]));
-        }
-        
-        Collections.shuffle(queries);
-        int count = 1;
-        for (Integer query : queries) {
-            int aopstComps = aopsTree.find(query);
-            int splayComps = splayTree.find(query);
-            row = sheet.createRow(count);
-            count++;
-            cell0 = row.createCell(0);
-            cell0.setCellValue(query);
-            cell1 = row.createCell(1);
-            cell1.setCellValue(aopstComps);
-            cell2 = row.createCell(2);
-            cell2.setCellValue(splayComps);
-            cell3 = row.createCell(3);
-            cell3.setCellFormula("B" + count + "-C" + count);    
-        }
+//        Scanner sc = new Scanner(queryFile);
+//        ArrayList<Integer> queries = new ArrayList<>();
+//        
+//        while (sc.hasNextLine()){
+//            char[] chars = sc.nextLine().toCharArray();
+//            queries.add(Character.getNumericValue(chars[0]));
+//        }
+//        
+//        Collections.shuffle(queries);
+//        int count = 1;
+//        for (Integer query : queries) {
+//            int aopstComps = aopsTree.find(query);
+//            int splayComps = splayTree.find(query);
+//            row = sheet.createRow(count);
+//            count++;
+//            cell0 = row.createCell(0);
+//            cell0.setCellValue(query);
+//            cell1 = row.createCell(1);
+//            cell1.setCellValue(aopstComps);
+//            cell2 = row.createCell(2);
+//            cell2.setCellValue(splayComps);
+//            cell3 = row.createCell(3);
+//            cell3.setCellFormula("B" + count + "-C" + count);    
+//        }
         
         row = sheet.createRow(count);
         cell2 = row.createCell(2);

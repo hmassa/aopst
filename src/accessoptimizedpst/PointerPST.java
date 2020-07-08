@@ -1,3 +1,6 @@
+// Adapted from code written by Simon Pratt and found at 
+// https://github.com/hmassa/PrioritySearchTree
+
 /******************************************************************************
 *                       Copyright (c) 2011 - 2012 by                          *
 *                               Simon Pratt                                   *
@@ -106,7 +109,6 @@ public class PointerPST  implements Tree{
     private int aopstSearch(Comparable xVal, PointerPSTNode node, int count){
         count++;
 	if(node == null) {
-            System.out.println("The key " + xVal + " was not found. \nComparisons: " + count);
             return 0;
         }
 	Comparable nodeX = node.getX();
@@ -114,8 +116,6 @@ public class PointerPST  implements Tree{
 	if(nodeX == xVal) { 
             node.incY();
             int yVal = node.getY();
-//            System.out.println("The value " + xVal + " was found and has been "
-//                    + "accessed a total of " + yVal + " times. \nComparisons: " + count);
             if (node.getParent() != null && node.getParent().getY() < yVal){
                 node = node.getParent();
                 while (node.getParent() != null && node.getParent().getY() < yVal)
