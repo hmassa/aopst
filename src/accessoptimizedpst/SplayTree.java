@@ -98,14 +98,13 @@ public class SplayTree implements Tree {
 	    if (key.compareTo(t.key) < 0) {
                 count++;
 		if (t.left == null) break;
-                // count++; restructuring
+                // restructuring
 		if (key.compareTo(t.left.key) < 0) {
 		    y = t.left;                            /* rotate right */
 		    t.left = y.right;
 		    y.right = t;
 		    t = y;
-                    // restructuring
-		    if (t.left == null) break;
+                    if (t.left == null) break;
 		}
 		r.left = t;                                 /* link right */
 		r = t;
@@ -119,8 +118,7 @@ public class SplayTree implements Tree {
 		    t.right = y.left;
 		    y.left = t;
 		    t = y;
-                    // count++; - restructuring
-		    if (t.right == null) break;
+                    if (t.right == null) break;
 		}
 		l.right = t;                                /* link left */
 		l = t;

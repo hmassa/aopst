@@ -28,7 +28,7 @@ import static java.lang.Math.floor;
 import java.util.*;
 
 public class PointerPST  implements Tree{
-    private PointerPSTNode root;
+    public PointerPSTNode root;
     
     public PointerPST(ArrayList<PointerPSTNode> points) {
 	if(points == null) return;
@@ -113,7 +113,7 @@ public class PointerPST  implements Tree{
         }
 	Comparable nodeX = node.getX();
         count++;
-	if(nodeX == xVal) { 
+	if(nodeX.compareTo(xVal) == 0) { 
             node.incY();
             int yVal = node.getY();
             if (node.getParent() != null && node.getParent().getY() < yVal){
