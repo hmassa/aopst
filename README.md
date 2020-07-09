@@ -13,3 +13,4 @@ Currently, 3 different tests have been run comparing the performance of this new
 
 ## Future Tests
 In progress is a test that examines the performance of these two algorithms on a dataset that adheres to Zipf's law. This test involves constructing trees out of the most commonly used words in the English language and using the words of a body of text as the search keys.
+We are also planning to evaluate algorithm performance on parameterized datasets that vary from uniform to highly non-uniform.
