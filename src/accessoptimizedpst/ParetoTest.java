@@ -1,59 +1,25 @@
 package accessoptimizedpst;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.concurrent.ThreadLocalRandom;
-import org.apache.poi.xssf.usermodel.XSSFCell;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-public class ParetoTest {
-    public static void main(String[] args) throws IOException{
-        ArrayList<Integer> ints = new ArrayList<>();
+
+public class ParetoTest extends Test {
+    @Override
+    void generateKeys() {
         for (int i = 0; i < 1000; i++)
-            ints.add(i);
+            keys.add(i);
         
-        Collections.shuffle(ints);
+        Collections.shuffle(keys);
+    }
 
-        SplayTree splayTree = new SplayTree();
-        ArrayList<PointerPSTNode> nodes = new ArrayList<>();
-        
-        for (Integer i : ints){
-            splayTree.insert(i);
-            nodes.add(new PointerPSTNode(i, 0));
-        }
-        
-        PointerPST aopsTree = new PointerPST(nodes);
-        
-        String fileName = "test_results.xlsx";
-        File file = new File(fileName);
-        FileInputStream fis = new FileInputStream(file);
-        XSSFWorkbook workbook = new XSSFWorkbook(fis);
+    @Override
+    String getSheetName() {
+        return "Pareto";
+    }
 
-        String sheetName = "Pareto";
-        XSSFSheet sheet = workbook.getSheet(sheetName);
-        if (sheet == null){
-            sheet = workbook.createSheet(sheetName);
-            System.out.println("");
-        }
-        
-        XSSFRow row = sheet.createRow(0);
-        XSSFCell cell0 = row.createCell(0);
-        cell0.setCellValue("Search Key");
-        XSSFCell cell1 = row.createCell(1);
-        cell1.setCellValue("AOPST");
-        XSSFCell cell2 = row.createCell(2);
-        cell2.setCellValue("Splay Tree");
-        XSSFCell cell3 = row.createCell(3);
-        cell3.setCellValue("Difference (A - S)");
-
-        ArrayList<Integer> queries = new ArrayList<>();
-
+    @Override
+    void generateQueries() {
         for (int j = 0; j < 4000; j++)
             queries.add(ThreadLocalRandom.current().nextInt(0, 200));
         
@@ -61,31 +27,11 @@ public class ParetoTest {
             queries.add(ThreadLocalRandom.current().nextInt(200, 1000));
         
         Collections.shuffle(queries);
-        
-        int count = 1;
-        for (Integer query : queries) {
-            int aopstComps = aopsTree.find(query);
-            int splayComps = splayTree.find(query);
-            row = sheet.createRow(count);
-            count++;
-            cell0 = row.createCell(0);
-            cell0.setCellValue(query);
-            cell1 = row.createCell(1);
-            cell1.setCellValue(aopstComps);
-            cell2 = row.createCell(2);
-            cell2.setCellValue(splayComps);
-            cell3 = row.createCell(3);
-            cell3.setCellFormula("B" + count + "-C" + count);    
-        }
-        
-        row = sheet.createRow(count);
-        cell2 = row.createCell(2);
-        cell2.setCellValue("Total:");
-        cell3 = row.createCell(3);
-        cell3.setCellFormula("SUM(D2:D" + count +")");
-        
-        FileOutputStream out = new FileOutputStream(file);
-        workbook.write(out);
-        out.close();
+    }
+
+    @Override
+    String getString(Comparable x) {
+        Integer i = (Integer) x;
+        return Integer.toString(i);
     }
 }

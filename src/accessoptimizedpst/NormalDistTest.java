@@ -1,25 +1,26 @@
 package accessoptimizedpst;
 
 import java.util.Collections;
-
+import java.util.Random;
 /**
  * @author flipp
  */
-public class UniformDistTest extends Test { 
+public class NormalDistTest extends Test{
     @Override
     void generateKeys() {
         for (int i = 0; i < 1000; i++){
             keys.add(i);
-            queries.add(i);
-            queries.add(i);
-            queries.add(i);
         }
         Collections.shuffle(keys);
     }
 
     @Override
     void generateQueries() {
-        Collections.shuffle(queries);
+        Random ran = new Random();
+        for (int j = 0; j < 3000; j++){
+            double val = ran.nextGaussian()*100 + 500;
+            queries.add((int)Math.round(val));
+        }
     }
 
     @Override
@@ -30,6 +31,6 @@ public class UniformDistTest extends Test {
 
     @Override
     String getSheetName() {
-        return "Uniform Dist";
+        return "Normal Dist";
     }
 }

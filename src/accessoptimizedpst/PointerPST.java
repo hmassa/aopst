@@ -55,8 +55,6 @@ public class PointerPST  implements Tree{
 *       Algorithms, de Berg et al.  Section 5.5.                              *
 *                                                                             *
 ******************************************************************************/
-
-
     // Assumes all points are valid (e.g. not null)
     private PointerPSTNode buildTree(ArrayList<PointerPSTNode> nodes) {
 	if(nodes == null || nodes.size() < 1) return null;
@@ -97,11 +95,17 @@ public class PointerPST  implements Tree{
         }
 	return rootNode;
     }
-/******************************************************************************
-*                                                                             *
-*   Search for specified X value                                              *
-*                                                                             *
-******************************************************************************/
+    
+    @Override
+    public void insert(Comparable x){
+        //TODO
+    }
+    
+    @Override
+    public void delete(Comparable x){
+        //TODO
+    }
+    
     public int find(Comparable xVal){
         int count = 0;
 	return aopstSearch(xVal, root, count);
@@ -151,9 +155,9 @@ public class PointerPST  implements Tree{
             return 0;
         }
     }
-/******************************************************************************
-* Utility Functions                                                           *
-******************************************************************************/
+
+// Utility Functions
+
     public void printTree(){
         PointerPSTNode node = root;
         printTree(node);

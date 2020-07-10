@@ -35,7 +35,7 @@ public class SplayTree implements Tree {
 	root = n;
     }
 
-    public void remove(Comparable key) {
+    public void delete(Comparable key) {
 	Node x;
 	splay(key, 0);
 	if (key.compareTo(root.key) != 0) {
