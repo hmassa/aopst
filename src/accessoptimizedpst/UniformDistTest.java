@@ -1,26 +1,34 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package accessoptimizedpst;
 
-import java.util.ArrayList;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Random;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import java.util.concurrent.ThreadLocalRandom;
+
 /**
  *
  * @author flipp
  */
-public class AccessOptimizedPST{
+public class UniformDistTest {
     public static void main(String[] args) throws IOException{
         ArrayList<Integer> ints = new ArrayList<>();
+        ArrayList<Integer> queries = new ArrayList<>();
         for (int i = 0; i < 1000; i++){
             ints.add(i);
+            queries.add(i);
+            queries.add(i);
+            queries.add(i);
         }
         
         Collections.shuffle(ints);
@@ -40,7 +48,7 @@ public class AccessOptimizedPST{
         FileInputStream fis = new FileInputStream(file);
         XSSFWorkbook workbook = new XSSFWorkbook(fis);
 
-        String sheetName = "Normal Dist";
+        String sheetName = "Uniform Dist";
         XSSFSheet sheet = workbook.getSheet(sheetName);
         if (sheet == null){
             sheet = workbook.createSheet(sheetName);
@@ -57,14 +65,7 @@ public class AccessOptimizedPST{
         XSSFCell cell3 = row.createCell(3);
         cell3.setCellValue("Difference (A - S)");
 
-        ArrayList<Integer> queries = new ArrayList<>();
-        Random ran = new Random();
-        
-        for (int j = 0; j < 300; j++){
-            double val = ran.nextGaussian()*100 + 500;
-            queries.add((int)Math.round(val));
-        }
-        
+        Collections.shuffle(queries);
         
         int count = 1;
         for (Integer query : queries) {
