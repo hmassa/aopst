@@ -1,24 +1,23 @@
 package accessoptimizedpst;
 
-import java.util.ArrayList;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Scanner;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import java.util.concurrent.ThreadLocalRandom;
-/**
- *
- * @author flipp
- */
-public class AccessOptimizedPST{
+
+
+
+public class IntegerTest {
     public static void main(String[] args) throws IOException{
         ArrayList<Integer> ints = new ArrayList<>();
-        for (int i = 0; i < 1000; i++)
+        for (int i = 1; i < 10; i++)
             ints.add(i);
         
         Collections.shuffle(ints);
@@ -38,7 +37,7 @@ public class AccessOptimizedPST{
         FileInputStream fis = new FileInputStream(file);
         XSSFWorkbook workbook = new XSSFWorkbook(fis);
 
-        String sheetName = "Pareto";
+        String sheetName = "Population";
         XSSFSheet sheet = workbook.getSheet(sheetName);
         if (sheet == null){
             sheet = workbook.createSheet(sheetName);
@@ -54,17 +53,20 @@ public class AccessOptimizedPST{
         cell2.setCellValue("Splay Tree");
         XSSFCell cell3 = row.createCell(3);
         cell3.setCellValue("Difference (A - S)");
-
-        ArrayList<Integer> queries = new ArrayList<>();
-
-        for (int j = 0; j < 4000; j++)
-            queries.add(ThreadLocalRandom.current().nextInt(0, 200));
         
-        for (int k = 0; k < 1000; k++)
-            queries.add(ThreadLocalRandom.current().nextInt(200, 1000));
+
+        String queryFileName = "population.txt";
+        File queryFile = new File(queryFileName);
+        
+        Scanner sc = new Scanner(queryFile);
+        ArrayList<Integer> queries = new ArrayList<>();
+        
+        while (sc.hasNextLine()){
+            char[] chars = sc.nextLine().toCharArray();
+            queries.add(Character.getNumericValue(chars[0]));
+        }
         
         Collections.shuffle(queries);
-        
         int count = 1;
         for (Integer query : queries) {
             int aopstComps = aopsTree.find(query);

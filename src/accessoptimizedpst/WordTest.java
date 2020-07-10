@@ -1,34 +1,29 @@
 package accessoptimizedpst;
 
-import java.util.ArrayList;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Collections;
+import java.util.ArrayList;
+import java.util.Scanner;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.text.PDFTextStripper;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import java.util.concurrent.ThreadLocalRandom;
-/**
- *
- * @author flipp
- */
-public class AccessOptimizedPST{
-    public static void main(String[] args) throws IOException{
-        ArrayList<Integer> ints = new ArrayList<>();
-        for (int i = 0; i < 1000; i++)
-            ints.add(i);
-        
-        Collections.shuffle(ints);
 
+public class WordTest {
+    public static void main(String[] args) throws IOException{
         SplayTree splayTree = new SplayTree();
         ArrayList<PointerPSTNode> nodes = new ArrayList<>();
         
-        for (Integer i : ints){
-            splayTree.insert(i);
-            nodes.add(new PointerPSTNode(i, 0));
+        File wordList = new File("google-10000-english.txt");
+        Scanner sc = new Scanner(wordList);
+        while (sc.hasNextLine()){
+            String word = sc.nextLine();
+            nodes.add(new PointerPSTNode(word, 0));
+            splayTree.insert(word);
         }
         
         PointerPST aopsTree = new PointerPST(nodes);
@@ -38,7 +33,7 @@ public class AccessOptimizedPST{
         FileInputStream fis = new FileInputStream(file);
         XSSFWorkbook workbook = new XSSFWorkbook(fis);
 
-        String sheetName = "Pareto";
+        String sheetName = "Script";
         XSSFSheet sheet = workbook.getSheet(sheetName);
         if (sheet == null){
             sheet = workbook.createSheet(sheetName);
@@ -55,30 +50,26 @@ public class AccessOptimizedPST{
         XSSFCell cell3 = row.createCell(3);
         cell3.setCellValue("Difference (A - S)");
 
-        ArrayList<Integer> queries = new ArrayList<>();
-
-        for (int j = 0; j < 4000; j++)
-            queries.add(ThreadLocalRandom.current().nextInt(0, 200));
-        
-        for (int k = 0; k < 1000; k++)
-            queries.add(ThreadLocalRandom.current().nextInt(200, 1000));
-        
-        Collections.shuffle(queries);
+        PDDocument doc = PDDocument.load(new File("star-wars-episode-iv-a-new-hope-1977.pdf"));
+        PDFTextStripper pdfStripper = new PDFTextStripper();
+        String[] scriptWords = pdfStripper.getText(doc).split("\\W+");
         
         int count = 1;
-        for (Integer query : queries) {
-            int aopstComps = aopsTree.find(query);
-            int splayComps = splayTree.find(query);
-            row = sheet.createRow(count);
-            count++;
-            cell0 = row.createCell(0);
-            cell0.setCellValue(query);
-            cell1 = row.createCell(1);
-            cell1.setCellValue(aopstComps);
-            cell2 = row.createCell(2);
-            cell2.setCellValue(splayComps);
-            cell3 = row.createCell(3);
-            cell3.setCellFormula("B" + count + "-C" + count);    
+        for (String key : scriptWords){
+            int aopstComps = aopsTree.find(key.toLowerCase());
+            int splayComps = splayTree.find(key.toLowerCase());
+            if (aopstComps != 0){
+                row = sheet.createRow(count);
+                count++;
+                cell0 = row.createCell(0);
+                cell0.setCellValue(String.valueOf(key));
+                cell1 = row.createCell(1);
+                cell1.setCellValue(aopstComps);
+                cell2 = row.createCell(2);
+                cell2.setCellValue(splayComps);
+                cell3 = row.createCell(3);
+                cell3.setCellFormula("B" + count + "-C" + count);
+            }
         }
         
         row = sheet.createRow(count);
@@ -92,3 +83,4 @@ public class AccessOptimizedPST{
         out.close();
     }
 }
+

@@ -1,21 +1,18 @@
 package accessoptimizedpst;
 
-import java.util.ArrayList;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.concurrent.ThreadLocalRandom;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import java.util.concurrent.ThreadLocalRandom;
-/**
- *
- * @author flipp
- */
-public class AccessOptimizedPST{
+
+public class ParetoTest {
     public static void main(String[] args) throws IOException{
         ArrayList<Integer> ints = new ArrayList<>();
         for (int i = 0; i < 1000; i++)
