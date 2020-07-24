@@ -7,12 +7,6 @@ import java.util.Collections;
 import java.util.Scanner;
 
 public class CharacterTest extends Test{
-//    @Override
-//    void generateKeys() {
-//        for (int i = 0; i < 26; i++)
-//            keys.add((char)(i + 97));
-//    }
-
     @Override
     void generateQueries() {
         String queryFileName = "lyrics.txt";
@@ -33,14 +27,17 @@ public class CharacterTest extends Test{
     
     @Override
     void generateTrees() {
-//        splayTree = new SplayTree();
         ArrayList<PointerPSTNode> pstNodes = new ArrayList<>();
-        ArrayList<Comparable> bstNodes = new ArrayList<>();
+        ArrayList<Character> bstNodes = new ArrayList<>();
         
         for (int i = 0; i < 26; i++){
             bstNodes.add((char)(i + 97));
         }
-        bst = new BalancedBST(bstNodes);
+//        bst = new BalancedBST(bstNodes);
+        Collections.shuffle(bstNodes);
+        for (char c : bstNodes){
+            splayTree.insert(c);
+        }
         
         int[] charCounts = new int[26];
         for (Comparable q : queries){

@@ -20,14 +20,18 @@ public class UniformDistTest extends Test {
     @Override
     void generateTrees() {
         ArrayList<PointerPSTNode> pstNodes = new ArrayList<>();
-        ArrayList<Comparable> bstNodes = new ArrayList<>();
+        ArrayList<Integer> bstNodes = new ArrayList<>();
 
         for (int i = 0; i < 1000; i++){
             pstNodes.add(new PointerPSTNode(i, 3));
             bstNodes.add(i);
         }
         aopst = new StaticAOPST(pstNodes);
-        bst = new BalancedBST(bstNodes);
+//        bst = new BalancedBST(bstNodes);
+        Collections.shuffle(bstNodes);
+        for (int i : bstNodes) {
+            splayTree.insert(i);
+        }
     }
 
     @Override

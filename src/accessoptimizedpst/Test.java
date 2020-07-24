@@ -15,11 +15,10 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  * @author flipp
  */
 public abstract class Test {
-//    private SplayTree splayTree;
-    protected BalancedBST bst;
+    protected SplayTree splayTree = new SplayTree();
+//    protected BalancedBST bst;
     protected StaticAOPST aopst;
     
-//    protected ArrayList<Comparable> keys = new ArrayList<>();
     protected ArrayList<Comparable> queries = new ArrayList<>();
     
     private File file;
@@ -33,8 +32,8 @@ public abstract class Test {
     private XSSFCell cell3;
     
     public void openExcel() throws FileNotFoundException, IOException{
-        //String fileName = "test_results.xlsx";
-        String fileName = "aopst_vs_bst.xlsx";
+        String fileName = "aopst_vs_splay.xlsx";
+//        String fileName = "aopst_vs_bst.xlsx";
         file = new File(fileName);
         FileInputStream fis = new FileInputStream(file);
         workbook = new XSSFWorkbook(fis);
@@ -51,8 +50,8 @@ public abstract class Test {
         cell1 = row.createCell(1);
         cell1.setCellValue("AOPST");
         cell2 = row.createCell(2);
-//        cell2.setCellValue("Splay Tree");
-        cell2.setCellValue("Balanced BST");
+        cell2.setCellValue("Splay Tree");
+//        cell2.setCellValue("Balanced BST");
         cell3 = row.createCell(3);
         cell3.setCellValue("Difference (A - B)");
     }
@@ -61,8 +60,8 @@ public abstract class Test {
         int count = 1;
         for (Comparable query : queries) {
             int aopstComps = aopst.find(query);
-            int bstComps = bst.find(query);
-//            int splayComps = splayTree.find(query);
+//            int bstComps = bst.find(query);
+            int splayComps = splayTree.find(query);
             if (aopstComps != 0){
                 row = sheet.createRow(count);
                 count++;
@@ -71,8 +70,8 @@ public abstract class Test {
                 cell1 = row.createCell(1);
                 cell1.setCellValue(aopstComps);
                 cell2 = row.createCell(2);
-//                cell2.setCellValue(splayComps);
-                cell2.setCellValue(bstComps);
+                cell2.setCellValue(splayComps);
+//                cell2.setCellValue(bstComps);
                 cell3 = row.createCell(3);
                 cell3.setCellFormula("B" + count + "-C" + count);
             }

@@ -40,12 +40,16 @@ public class IntegerTest extends Test {
     @Override
     void generateTrees() {
         ArrayList<PointerPSTNode> pstNodes = new ArrayList<>();
-        ArrayList<Comparable> bstNodes = new ArrayList<>();
+        ArrayList<Integer> bstNodes = new ArrayList<>();
         
         for (int i = 1; i < 10; i++){
             bstNodes.add(i);
         }
-        bst = new BalancedBST(bstNodes);
+//        bst = new BalancedBST(bstNodes);
+        Collections.shuffle(bstNodes);
+        for (int i : bstNodes) {
+            splayTree.insert(i);
+        }
         
         int[] counts = new int[9];
         for(Comparable q : queries) {

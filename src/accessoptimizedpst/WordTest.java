@@ -19,6 +19,7 @@ public class WordTest extends Test{
             String[] scriptWords = pdfStripper.getText(doc).split("\\W+");
             for (String sw : scriptWords)
                 queries.add(sw.toLowerCase());
+            doc.close();
         } catch (IOException ex) {
             System.out.println("The script file could not be found.");
             System.exit(-1);
@@ -28,7 +29,7 @@ public class WordTest extends Test{
     @Override
     void generateTrees() {
         ArrayList<PointerPSTNode> pstNodes = new ArrayList<>();
-        ArrayList<Comparable> bstNodes = new ArrayList<>();
+//        ArrayList<Comparable> bstNodes = new ArrayList<>();
         
         HashMap<String, Integer> words = new HashMap<>();
         for (Comparable q : queries){
@@ -43,10 +44,10 @@ public class WordTest extends Test{
         
             for (HashMap.Entry<String, Integer> pair : words.entrySet()) {
                 pstNodes.add(new PointerPSTNode(pair.getKey(), pair.getValue()));
-                bstNodes.add(pair.getKey());
+                splayTree.insert(pair.getKey());
             }
         
-        bst = new BalancedBST(bstNodes);
+//        bst = new BalancedBST(bstNodes);
         aopst = new StaticAOPST(pstNodes);
     }
 
