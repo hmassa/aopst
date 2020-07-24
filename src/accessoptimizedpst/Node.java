@@ -1,6 +1,6 @@
 package accessoptimizedpst;
 
-class Node
+public class Node
 {
     Comparable key;
     Node left;

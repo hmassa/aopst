@@ -1,18 +1,11 @@
 package accessoptimizedpst;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.concurrent.ThreadLocalRandom;
 
 
 public class ParetoTest extends Test {
-    @Override
-    void generateKeys() {
-        for (int i = 0; i < 1000; i++)
-            keys.add(i);
-        
-        Collections.shuffle(keys);
-    }
-
     @Override
     String getSheetName() {
         return "Pareto";
@@ -27,6 +20,27 @@ public class ParetoTest extends Test {
             queries.add(ThreadLocalRandom.current().nextInt(200, 1000));
         
         Collections.shuffle(queries);
+    }
+    
+    @Override
+    void generateTrees() {
+        ArrayList<PointerPSTNode> pstNodes = new ArrayList<>();
+        ArrayList<Comparable> bstNodes = new ArrayList<>();
+        
+        for (int i = 0; i < 1000; i++){
+            bstNodes.add(i);
+        }
+        bst = new BalancedBST(bstNodes);
+        
+        int[] counts = new int[1000];
+        for(Comparable q : queries) {
+            counts[(int)q] += 1;
+        }
+        
+        for (int i = 0; i < 1000; i++){
+            pstNodes.add(new PointerPSTNode(i, counts[i]));
+        }
+        aopst = new StaticAOPST(pstNodes);
     }
 
     @Override

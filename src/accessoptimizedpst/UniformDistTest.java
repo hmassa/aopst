@@ -1,5 +1,6 @@
 package accessoptimizedpst;
 
+import java.util.ArrayList;
 import java.util.Collections;
 
 /**
@@ -7,19 +8,26 @@ import java.util.Collections;
  */
 public class UniformDistTest extends Test { 
     @Override
-    void generateKeys() {
+    void generateQueries() {
         for (int i = 0; i < 1000; i++){
-            keys.add(i);
             queries.add(i);
             queries.add(i);
             queries.add(i);
         }
-        Collections.shuffle(keys);
-    }
-
-    @Override
-    void generateQueries() {
         Collections.shuffle(queries);
+    }
+    
+    @Override
+    void generateTrees() {
+        ArrayList<PointerPSTNode> pstNodes = new ArrayList<>();
+        ArrayList<Comparable> bstNodes = new ArrayList<>();
+
+        for (int i = 0; i < 1000; i++){
+            pstNodes.add(new PointerPSTNode(i, 3));
+            bstNodes.add(i);
+        }
+        aopst = new StaticAOPST(pstNodes);
+        bst = new BalancedBST(bstNodes);
     }
 
     @Override

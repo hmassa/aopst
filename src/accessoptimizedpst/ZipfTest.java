@@ -1,17 +1,11 @@
 package accessoptimizedpst;
 
+import java.util.ArrayList;
 import java.util.Collections;
 
 public class ZipfTest extends Test{
     private int size = 100;
     private double skew = 1.07d;
-
-    @Override
-    void generateKeys() {
-        for (int i = 1; i < size; i++){
-            keys.add(i);
-        }
-    }
 
     @Override
     String getSheetName() {
@@ -29,6 +23,27 @@ public class ZipfTest extends Test{
         }
         
         Collections.shuffle(queries);
+    }
+    
+    @Override
+    void generateTrees() {
+        ArrayList<PointerPSTNode> pstNodes = new ArrayList<>();
+        ArrayList<Comparable> bstNodes = new ArrayList<>();
+        
+        for (int i = 1; i <= size; i++){
+            bstNodes.add(i);
+        }
+        bst = new BalancedBST(bstNodes);
+        
+        int[] counts = new int[size];
+        for(Comparable q : queries) {
+            counts[(int)q - 1] += 1;
+        }
+        
+        for (int i = 0; i < size; i++){
+            pstNodes.add(new PointerPSTNode(i+1, counts[i]));
+        }
+        aopst = new StaticAOPST(pstNodes);
     }
 
     @Override

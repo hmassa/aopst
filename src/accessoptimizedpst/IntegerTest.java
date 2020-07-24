@@ -8,13 +8,6 @@ import java.util.Scanner;
 
 public class IntegerTest extends Test {
     @Override
-    void generateKeys() {
-        for (int i = 1; i < 10; i++)
-            keys.add(i);
-        Collections.shuffle(keys);
-    }
-
-    @Override
     String getSheetName() {
         return "Population";
     }
@@ -42,5 +35,26 @@ public class IntegerTest extends Test {
     String getString(Comparable x) {
         Integer i = (Integer) x;
         return Integer.toString(i);
+    }
+
+    @Override
+    void generateTrees() {
+        ArrayList<PointerPSTNode> pstNodes = new ArrayList<>();
+        ArrayList<Comparable> bstNodes = new ArrayList<>();
+        
+        for (int i = 1; i < 10; i++){
+            bstNodes.add(i);
+        }
+        bst = new BalancedBST(bstNodes);
+        
+        int[] counts = new int[9];
+        for(Comparable q : queries) {
+            counts[(int)q - 1] += 1;
+        }
+        
+        for (int i = 0; i < 9; i++){
+            pstNodes.add(new PointerPSTNode(i+1, counts[i]));
+        }
+        aopst = new StaticAOPST(pstNodes);
     }
 }

@@ -15,10 +15,11 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  * @author flipp
  */
 public abstract class Test {
-    private SplayTree splayTree;
-    private PointerPST aopsTree;
+//    private SplayTree splayTree;
+    protected BalancedBST bst;
+    protected StaticAOPST aopst;
     
-    protected ArrayList<Comparable> keys = new ArrayList<>();
+//    protected ArrayList<Comparable> keys = new ArrayList<>();
     protected ArrayList<Comparable> queries = new ArrayList<>();
     
     private File file;
@@ -31,20 +32,9 @@ public abstract class Test {
     private XSSFCell cell2;
     private XSSFCell cell3;
     
-    public void generateTrees(){
-        splayTree = new SplayTree();
-        
-        ArrayList<PointerPSTNode> nodes = new ArrayList<>();
-        for (Comparable k : keys){
-            splayTree.insert(k);
-            nodes.add(new PointerPSTNode(k, 0));
-        }
-        
-        aopsTree = new PointerPST(nodes);
-    }
-    
     public void openExcel() throws FileNotFoundException, IOException{
-        String fileName = "test_results.xlsx";
+        //String fileName = "test_results.xlsx";
+        String fileName = "aopst_vs_bst.xlsx";
         file = new File(fileName);
         FileInputStream fis = new FileInputStream(file);
         workbook = new XSSFWorkbook(fis);
@@ -61,16 +51,18 @@ public abstract class Test {
         cell1 = row.createCell(1);
         cell1.setCellValue("AOPST");
         cell2 = row.createCell(2);
-        cell2.setCellValue("Splay Tree");
+//        cell2.setCellValue("Splay Tree");
+        cell2.setCellValue("Balanced BST");
         cell3 = row.createCell(3);
-        cell3.setCellValue("Difference (A - S)");
+        cell3.setCellValue("Difference (A - B)");
     }
     
     public void searchAndWrite() throws IOException{
         int count = 1;
         for (Comparable query : queries) {
-            int aopstComps = aopsTree.find(query);
-            int splayComps = splayTree.find(query);
+            int aopstComps = aopst.find(query);
+            int bstComps = bst.find(query);
+//            int splayComps = splayTree.find(query);
             if (aopstComps != 0){
                 row = sheet.createRow(count);
                 count++;
@@ -79,7 +71,8 @@ public abstract class Test {
                 cell1 = row.createCell(1);
                 cell1.setCellValue(aopstComps);
                 cell2 = row.createCell(2);
-                cell2.setCellValue(splayComps);
+//                cell2.setCellValue(splayComps);
+                cell2.setCellValue(bstComps);
                 cell3 = row.createCell(3);
                 cell3.setCellFormula("B" + count + "-C" + count);
             }
@@ -96,8 +89,8 @@ public abstract class Test {
         out.close();
     }
     
-    abstract void generateKeys();
     abstract String getSheetName();
     abstract void generateQueries();
     abstract String getString(Comparable x);
+    abstract void generateTrees();
 }

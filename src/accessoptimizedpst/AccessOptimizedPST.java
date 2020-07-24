@@ -6,13 +6,13 @@ import java.io.IOException;
  */
 public class AccessOptimizedPST{
     public static void main(String[] args) throws IOException{
-        Test test = new ZipfTest();
+        Test test = new WordTest();
         
-        test.generateKeys();
+        test.generateQueries();
         test.generateTrees();
 
         test.openExcel();
-        test.generateQueries();
         test.searchAndWrite();
+        
     }
 }

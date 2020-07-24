@@ -1,5 +1,6 @@
 package accessoptimizedpst;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 /**
@@ -7,20 +8,33 @@ import java.util.Random;
  */
 public class NormalDistTest extends Test{
     @Override
-    void generateKeys() {
-        for (int i = 0; i < 1000; i++){
-            keys.add(i);
-        }
-        Collections.shuffle(keys);
-    }
-
-    @Override
     void generateQueries() {
         Random ran = new Random();
         for (int j = 0; j < 3000; j++){
             double val = ran.nextGaussian()*100 + 500;
             queries.add((int)Math.round(val));
         }
+    }
+    
+    @Override
+    void generateTrees() {
+        ArrayList<PointerPSTNode> pstNodes = new ArrayList<>();
+        ArrayList<Comparable> bstNodes = new ArrayList<>();
+        
+        for (int i = 0; i < 1000; i++){
+            bstNodes.add(i);
+        }
+        bst = new BalancedBST(bstNodes);
+        
+        int[] counts = new int[1000];
+        for(Comparable q : queries) {
+            counts[(int)q] += 1;
+        }
+        
+        for (int i = 0; i < 1000; i++){
+            pstNodes.add(new PointerPSTNode(i, counts[i]));
+        }
+        aopst = new StaticAOPST(pstNodes);
     }
 
     @Override

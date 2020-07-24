@@ -3,14 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/flipp/Documents/Computer%20Science/Research/AOPST/AccessOptimizedPST/src/accessoptimizedpst/AccessOptimizedPST.java</file>
-            <file>file:/C:/Users/flipp/Documents/Computer%20Science/Research/AOPST/AccessOptimizedPST/src/accessoptimizedpst/PointerPSTNode.java</file>
-            <file>file:/C:/Users/flipp/Documents/Computer%20Science/Research/AOPST/AccessOptimizedPST/src/accessoptimizedpst/UniformDistTest.java</file>
-            <file>file:/C:/Users/flipp/Documents/Computer%20Science/Research/AOPST/AccessOptimizedPST/src/accessoptimizedpst/ParetoTest.java</file>
-            <file>file:/C:/Users/flipp/Documents/Computer%20Science/Research/AOPST/AccessOptimizedPST/src/accessoptimizedpst/SplayTree.java</file>
-            <file>file:/C:/Users/flipp/Documents/Computer%20Science/Research/AOPST/AccessOptimizedPST/src/accessoptimizedpst/IntegerTest.java</file>
-            <file>file:/C:/Users/flipp/Documents/Computer%20Science/Research/AOPST/AccessOptimizedPST/src/accessoptimizedpst/PointerPST.java</file>
-            <file>file:/C:/Users/flipp/Documents/Computer%20Science/Research/AOPST/AccessOptimizedPST/src/accessoptimizedpst/WordTest.java</file>
+            <file>file:/C:/Users/flipp/Documents/CompSci/Research/AOPST/AccessOptimizedPST/src/accessoptimizedpst/ZipfTest.java</file>
+            <file>file:/C:/Users/flipp/Documents/CompSci/Research/AOPST/AccessOptimizedPST/src/accessoptimizedpst/StaticAOPST.java</file>
+            <file>file:/C:/Users/flipp/Documents/CompSci/Research/AOPST/AccessOptimizedPST/src/accessoptimizedpst/CharacterTest.java</file>
+            <file>file:/C:/Users/flipp/Documents/CompSci/Research/AOPST/AccessOptimizedPST/src/accessoptimizedpst/NormalDistTest.java</file>
+            <file>file:/C:/Users/flipp/Documents/CompSci/Research/AOPST/AccessOptimizedPST/src/accessoptimizedpst/Test.java</file>
+            <file>file:/C:/Users/flipp/Documents/CompSci/Research/AOPST/AccessOptimizedPST/src/accessoptimizedpst/AccessOptimizedPST.java</file>
+            <file>file:/C:/Users/flipp/Documents/CompSci/Research/AOPST/AccessOptimizedPST/src/accessoptimizedpst/WordTest.java</file>
+            <file>file:/C:/Users/flipp/Documents/CompSci/Research/AOPST/AccessOptimizedPST/src/accessoptimizedpst/ParetoTest.java</file>
+            <file>file:/C:/Users/flipp/Documents/CompSci/Research/AOPST/AccessOptimizedPST/src/accessoptimizedpst/IntegerTest.java</file>
+            <file>file:/C:/Users/flipp/Documents/CompSci/Research/AOPST/AccessOptimizedPST/src/accessoptimizedpst/UniformDistTest.java</file>
         </group>
     </open-files>
 </project-private>

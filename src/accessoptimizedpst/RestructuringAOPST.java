@@ -27,10 +27,10 @@ package accessoptimizedpst;
 import static java.lang.Math.floor;
 import java.util.*;
 
-public class PointerPST  implements Tree{
+public class RestructuringAOPST implements Tree{
     public PointerPSTNode root;
     
-    public PointerPST(ArrayList<PointerPSTNode> points) {
+    public RestructuringAOPST(ArrayList<PointerPSTNode> points) {
 	if(points == null) return;
 	Collections.sort(points); // Sort by y-coordinate in decreasing order
 	this.root = buildTree(points);
@@ -94,16 +94,6 @@ public class PointerPST  implements Tree{
                 hold.setParent(rootNode);
         }
 	return rootNode;
-    }
-    
-    @Override
-    public void insert(Comparable x){
-        //TODO
-    }
-    
-    @Override
-    public void delete(Comparable x){
-        //TODO
     }
     
     public int find(Comparable xVal){
