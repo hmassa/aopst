@@ -1,7 +1,6 @@
 package accessoptimizedpst;
 
 import java.io.IOException;
-import java.util.ArrayList;
 /**
  * @author flipp
  */
@@ -17,6 +16,7 @@ public class AccessOptimizedPST{
         
         test.setKeySize(100000);
         test.generateQueries();
+
         test.generateTrees();
         test.searchAndWrite();
         

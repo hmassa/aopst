@@ -14,16 +14,18 @@ import java.util.Random;
  * @author flipp
  */
 public class CoinTossTest extends Test{
-    private final int maxQueries = 1000000;
-    private final ArrayList<Comparable> randomizedKeys = new ArrayList<>();
+    private final int maxQueries = 100000000;
+    private ArrayList<Comparable> randomizedKeys;
     
     @Override
     void generateQueries() {
+        randomizedKeys = new ArrayList<>();
         for (int i = 1; i <= numKeys; i++) {
             randomizedKeys.add(i);
         }
         Collections.shuffle(randomizedKeys);
         
+        queries = new ArrayList<>();
         for (int i = 0; i < numKeys; i++){
             int queryCount = (int) Math.round(maxQueries/Math.pow(2, i+1));
             Comparable queryVal = randomizedKeys.get(i);
@@ -36,7 +38,8 @@ public class CoinTossTest extends Test{
     }
 
     @Override
-    void generateTrees() {        
+    void generateTrees() {
+        splayTree = new SplayTree();
         ArrayList<PointerPSTNode> pstNodes = new ArrayList<>();
         ArrayList<Comparable> bstNodes = new ArrayList<>();
         

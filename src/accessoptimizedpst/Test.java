@@ -7,11 +7,11 @@ import java.util.ArrayList;
  * @author flipp
  */
 public abstract class Test {
-    protected SplayTree splayTree = new SplayTree();
+    protected SplayTree splayTree;
     protected BalancedBST bst;
     protected StaticAOPST aopst;
     
-    protected ArrayList<Comparable> queries = new ArrayList<>();
+    protected ArrayList<Comparable> queries;
     protected String testName;
     protected int numKeys;
     protected int numQueries;

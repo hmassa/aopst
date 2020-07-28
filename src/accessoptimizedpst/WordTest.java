@@ -28,6 +28,7 @@ public class WordTest extends Test{
     
     @Override
     void generateTrees() {
+        splayTree = new SplayTree();
         ArrayList<PointerPSTNode> pstNodes = new ArrayList<>();
         ArrayList<Comparable> bstNodes = new ArrayList<>();
         
