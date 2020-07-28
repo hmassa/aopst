@@ -117,7 +117,7 @@ public class StaticAOPST implements Tree {
                 int direction = node.getMaxLeft().compareTo(xVal);
                 count++;
                 if(direction >= 0)
-                    return aopstSearch(xVal, leftChild, count);
+                    return aopstSearch(xVal, leftChild, count); 
                 else 
                     return aopstSearch(xVal, node.getRightChild(), count);
             }

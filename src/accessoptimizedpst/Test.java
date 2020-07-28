@@ -1,6 +1,5 @@
 package accessoptimizedpst;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 
@@ -34,18 +33,18 @@ public abstract class Test {
             bstTotal += bst.find(query);
             splayTotal += splayTree.find(query);
         }
-        float bstAvg = (float)bstTotal/(queries.size());
-        float splayAvg = (float)splayTotal/(queries.size());
-        float aopstAvg = (float)aopstTotal/(queries.size());
+        float bstAvg = (float)bstTotal/(numQueries);
+        float splayAvg = (float)splayTotal/(numQueries);
+        float aopstAvg = (float)aopstTotal/(numQueries);
         
         String dbSize = Integer.toString(numKeys/1000) + "k";
         System.out.printf("%-9s|%-9.4f|%-9.4f|%-9.4f|\n", dbSize, bstAvg, splayAvg, aopstAvg);
         System.out.println("_________|_________|_________|_________|");
     }
     
-//    public void setKeySize(int keys) {
-//        this.numKeys = keys;
-//    }
+    public void setKeySize(int keys) {
+        this.numKeys = keys;
+    }
     
     abstract void generateQueries();
     abstract void generateTrees();

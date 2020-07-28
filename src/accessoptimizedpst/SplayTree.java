@@ -39,10 +39,8 @@ public class SplayTree implements Tree {
 	Node x;
 	splay(key, 0);
 	if (key.compareTo(root.key) != 0) {
-	    //            throw new ItemNotFoundException(x.toString());
 	    return;
 	}
-	// Now delete the root
 	if (root.left == null) {
 	    root = root.right;
 	} else {
@@ -58,8 +56,7 @@ public class SplayTree implements Tree {
             return 0;
         } else {
             int comparisons = splay(key, 0);
-            return comparisons + 1;
-            // +1 for if (root.key...) statement
+            return comparisons;
         }
     }
 
