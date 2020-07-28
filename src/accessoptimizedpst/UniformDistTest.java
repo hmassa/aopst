@@ -9,39 +9,33 @@ import java.util.Collections;
 public class UniformDistTest extends Test { 
     @Override
     void generateQueries() {
-        for (int i = 0; i < 1000; i++){
-            queries.add(i);
-            queries.add(i);
+        for (int i = 0; i < numKeys; i++){
             queries.add(i);
         }
+        numQueries = queries.size();
         Collections.shuffle(queries);
     }
     
     @Override
     void generateTrees() {
         ArrayList<PointerPSTNode> pstNodes = new ArrayList<>();
-        ArrayList<Integer> bstNodes = new ArrayList<>();
+        ArrayList<Comparable> bstNodes = new ArrayList<>();
 
-        for (int i = 0; i < 1000; i++){
-            pstNodes.add(new PointerPSTNode(i, 3));
+        for (int i = 0; i < numKeys; i++){
+            pstNodes.add(new PointerPSTNode(i, 1));
             bstNodes.add(i);
         }
         aopst = new StaticAOPST(pstNodes);
-//        bst = new BalancedBST(bstNodes);
+        bst = new BalancedBST(bstNodes);
+        
         Collections.shuffle(bstNodes);
-        for (int i : bstNodes) {
+        for (Comparable i : bstNodes) {
             splayTree.insert(i);
         }
     }
-
+    
     @Override
-    String getString(Comparable x) {
-        Integer i = (Integer) x;
-        return Integer.toString(i);
-    }
-
-    @Override
-    String getSheetName() {
-        return "Uniform Dist";
+    void setName() {
+        testName = "Uniform Distribution";
     }
 }

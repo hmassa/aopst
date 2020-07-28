@@ -98,31 +98,30 @@ public class StaticAOPST implements Tree {
 	return rootNode;
     }
     
+    @Override
     public int find(Comparable xVal){
         int count = 0;
 	return aopstSearch(xVal, root, count);
     }
     private int aopstSearch(Comparable xVal, PointerPSTNode node, int count){
-        count++;
 	if(node == null) {
-            return 0;
+            return count;
         }
-	Comparable nodeX = node.getX();
+        int diff = node.getX().compareTo(xVal);
         count++;
-	if(nodeX.compareTo(xVal) == 0) { 
+	if(diff == 0) { 
             return count;
 	} else {
             PointerPSTNode leftChild = node.getLeftChild();
-            count++;
             if(leftChild != null) {
-                Comparable nodeR = node.getMaxLeft();
+                int direction = node.getMaxLeft().compareTo(xVal);
                 count++;
-                if(0 <= nodeR.compareTo(xVal))
+                if(direction >= 0)
                     return aopstSearch(xVal, leftChild, count);
                 else 
                     return aopstSearch(xVal, node.getRightChild(), count);
             }
-            return 0;
+            return count;
         }
     }
 
@@ -136,8 +135,8 @@ public class StaticAOPST implements Tree {
     private void printTree(PointerPSTNode node){
         if (node != null) {
             printTree(node.getLeftChild());
-            printTree(node.getRightChild());
             System.out.println(node.getPoint());
+            printTree(node.getRightChild());  
         }
     }
 }

@@ -57,13 +57,9 @@ public class SplayTree implements Tree {
 	if (root == null) {
             return 0;
         } else {
-            int comparisons = splay(key, 0) + 1;
-            // +1 for if (root == null) statement
-            if(root.key.compareTo(key) != 0)
-                return 0;
-            else
-                return comparisons + 1;
-                // +1 for if (root.key...) statement
+            int comparisons = splay(key, 0);
+            return comparisons + 1;
+            // +1 for if (root.key...) statement
         }
     }
 
@@ -94,9 +90,9 @@ public class SplayTree implements Tree {
 	t = root;
 	header.left = header.right = null;
 	for (;;) {
+            int diff = key.compareTo(t.key);
             count++;
-	    if (key.compareTo(t.key) < 0) {
-                count++;
+	    if (diff < 0) {
 		if (t.left == null) break;
                 count++;
 		if (key.compareTo(t.left.key) < 0) {
@@ -104,14 +100,12 @@ public class SplayTree implements Tree {
 		    t.left = y.right;
 		    y.right = t;
 		    t = y;
-                    count++;
                     if (t.left == null) break;
 		}
 		r.left = t;                                 /* link right */
 		r = t;
 		t = t.left;
-	    } else if (key.compareTo(t.key) > 0) {
-                count += 2;     // one for else if, one for if (t.right ...)
+	    } else if (diff > 0) {
 		if (t.right == null) break;
                 count++;
 		if (key.compareTo(t.right.key) > 0) {
@@ -119,14 +113,12 @@ public class SplayTree implements Tree {
 		    t.right = y.left;
 		    y.left = t;
 		    t = y;
-                    count++;
                     if (t.right == null) break;
 		}
 		l.right = t;                                /* link left */
 		l = t;
 		t = t.right;
 	    } else {
-                count++;        // for previous else if
 		break;
 	    }
 	}

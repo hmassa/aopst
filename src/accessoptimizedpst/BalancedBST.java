@@ -34,19 +34,17 @@ public class BalancedBST implements Tree {
         Node node = this.root;
         
         while (node != null) { 
-            count += 2;  // one for while, one for if
-            if (key.compareTo(node.key) > 0) {
+            int diff = key.compareTo(node.key);
+            count++;
+            if (diff > 0) {
                 node = node.right; 
-            } else if (key.compareTo(node.key) < 0) {
-                count++;
-                node = node.left;
-                
+            } else if (diff < 0) {
+                node = node.left;   
             } else {
-                count++;
                 return count; 
             }
         } 
-        return 0; 
+        return count;
     }
     
     public void preOrder(Node node) { 

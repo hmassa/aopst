@@ -9,46 +9,43 @@ import java.util.Random;
 public class NormalDistTest extends Test{
     @Override
     void generateQueries() {
+        int mid = numKeys/2;
+        int range = numKeys/10;
         Random ran = new Random();
-        for (int j = 0; j < 3000; j++){
-            double val = ran.nextGaussian()*100 + 500;
-            queries.add((int)Math.round(val));
+        for (int j = 0; j < numKeys; j++){
+            double val = ran.nextGaussian()*range + mid;
+            if (val >= 0 && val < numKeys) {
+               queries.add((int)Math.round(val)); 
+            }
+            numQueries = queries.size();
         }
     }
     
     @Override
     void generateTrees() {
         ArrayList<PointerPSTNode> pstNodes = new ArrayList<>();
-        ArrayList<Integer> bstNodes = new ArrayList<>();
-        
-        for (int i = 0; i < 1000; i++){
-            bstNodes.add(i);
-        }
-//        bst = new BalancedBST(bstNodes);
-        Collections.shuffle(bstNodes);
-        for (int i : bstNodes) {
-            splayTree.insert(i);
-        }
-        
-        int[] counts = new int[1000];
+        ArrayList<Comparable> bstNodes = new ArrayList<>();
+
+        int[] counts = new int[numKeys];
         for(Comparable q : queries) {
             counts[(int)q] += 1;
         }
         
-        for (int i = 0; i < 1000; i++){
+        for (int i = 0; i < numKeys; i++){
             pstNodes.add(new PointerPSTNode(i, counts[i]));
+            bstNodes.add(i);
         }
         aopst = new StaticAOPST(pstNodes);
+        bst = new BalancedBST(bstNodes);
+        
+        Collections.shuffle(bstNodes);
+        for (Comparable i : bstNodes) {
+            splayTree.insert(i);
+        }
     }
 
     @Override
-    String getString(Comparable x) {
-        Integer i = (Integer) x;
-        return Integer.toString(i);
-    }
-
-    @Override
-    String getSheetName() {
-        return "Normal Dist";
+    void setName() {
+        testName = "Normal Distribution: ";
     }
 }
