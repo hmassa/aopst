@@ -14,8 +14,9 @@ import java.util.Random;
  * @author flipp
  */
 public class CoinTossTest extends Test{
-    private final int maxQueries = 100000000;
-    private ArrayList<Comparable> randomizedKeys;
+    private final int maxQueries = 10000000;
+    ArrayList<Integer> randomizedKeys;
+    private int[] queryKeys;
     
     @Override
     void generateQueries() {
@@ -24,6 +25,11 @@ public class CoinTossTest extends Test{
             randomizedKeys.add(i);
         }
         Collections.shuffle(randomizedKeys);
+        
+        queryKeys = new int[64];
+        for (int i = 0; i < 64; i++){
+            queryKeys[i] = randomizedKeys.get(i);
+        }
         
         queries = new ArrayList<>();
         for (int i = 0; i < numKeys; i++){
@@ -45,7 +51,7 @@ public class CoinTossTest extends Test{
         
         for (int i = 0; i < numKeys; i++){
             int queryCount = (int) Math.round(maxQueries/Math.pow(2, i+1));
-            Comparable queryVal = randomizedKeys.get(i);
+            int queryVal = randomizedKeys.get(i);
             pstNodes.add(new PointerPSTNode(queryVal, queryCount));
             bstNodes.add(queryVal);
             splayTree.insert(queryVal);
@@ -58,5 +64,44 @@ public class CoinTossTest extends Test{
     @Override
     void setName() {
         testName = "Coin Toss Test: ";
+    }
+    
+    private int tossCoin() {
+        int count = 0;
+        long randint = lrand();
+
+        while (randint%2 == 1) {
+            count++;
+            randint >>= 1;
+        }
+        
+        return count;
+    }
+
+    private long lrand() {
+        Random rand = new Random();
+        long r = Math.abs(rand.nextLong());
+        return r;
+    }
+    
+    @Override
+    public void searchAndWrite() {
+        int bstTotal = 0;
+        int splayTotal = 0;
+        int aopstTotal = 0;
+        for (int i = 0; i < maxQueries; i++) {
+            int query = queryKeys[tossCoin()];
+            aopstTotal += aopst.find(query);
+            bstTotal += bst.find(query);
+            splayTotal += splayTree.find(query);
+        }
+
+        float bstAvg = (float)bstTotal/(maxQueries);
+        float splayAvg = (float)splayTotal/(maxQueries);
+        float aopstAvg = (float)aopstTotal/(maxQueries);
+        
+        String dbSize = Integer.toString(numKeys/1000) + "k";
+        System.out.printf("%-9s|%-9.4f|%-9.4f|%-9.4f|\n", dbSize, bstAvg, splayAvg, aopstAvg);
+        System.out.println("_________|_________|_________|_________|");
     }
 }
