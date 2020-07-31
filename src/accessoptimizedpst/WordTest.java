@@ -11,6 +11,7 @@ public class WordTest extends Test{
     @Override
     void generateQueries() {
         PDDocument doc;
+        queries = new ArrayList<>();
         try {
             doc = PDDocument.load(new File("star-wars-episode-iv-a-new-hope-1977.pdf"));
             PDFTextStripper pdfStripper = new PDFTextStripper();
@@ -56,6 +57,25 @@ public class WordTest extends Test{
     @Override
     void setName() {
         testName = "Script Search: ";
+    }
+    
+    @Override
+    public void searchAndWrite() {
+        long bstTotal = 0;
+        long splayTotal = 0;
+        long aopstTotal = 0;
+        for (Comparable query : queries) {
+            aopstTotal += aopst.find(query);
+            bstTotal += bst.find(query);
+            splayTotal += splayTree.find(query);
+        }
+        float bstAvg = (float)bstTotal/(numQueries);
+        float splayAvg = (float)splayTotal/(numQueries);
+        float aopstAvg = (float)aopstTotal/(numQueries);
+        
+        String dbSize = Integer.toString(numKeys/1000) + "k";
+        System.out.printf("%-9s|%-9.4f|%-9.4f|%-9.4f|\n", dbSize, bstAvg, splayAvg, aopstAvg);
+        System.out.println("_________|_________|_________|_________|");
     }
 }
 

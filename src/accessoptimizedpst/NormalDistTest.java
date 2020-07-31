@@ -9,6 +9,7 @@ import java.util.Random;
 public class NormalDistTest extends Test{
     @Override
     void generateQueries() {
+        queries = new ArrayList<>();
         int mid = numKeys/2;
         int range = numKeys/10;
         Random ran = new Random();
@@ -48,5 +49,24 @@ public class NormalDistTest extends Test{
     @Override
     void setName() {
         testName = "Normal Distribution: ";
+    }
+    
+    @Override
+    public void searchAndWrite() {
+        int bstTotal = 0;
+        int splayTotal = 0;
+        int aopstTotal = 0;
+        for (Comparable query : queries) {
+            aopstTotal += aopst.find(query);
+            bstTotal += bst.find(query);
+            splayTotal += splayTree.find(query);
+        }
+        float bstAvg = (float)bstTotal/(numQueries);
+        float splayAvg = (float)splayTotal/(numQueries);
+        float aopstAvg = (float)aopstTotal/(numQueries);
+        
+        String dbSize = Integer.toString(numKeys/1000) + "k";
+        System.out.printf("%-9s|%-9.4f|%-9.4f|%-9.4f|\n", dbSize, bstAvg, splayAvg, aopstAvg);
+        System.out.println("_________|_________|_________|_________|");
     }
 }

@@ -124,9 +124,8 @@ public class StaticAOPST implements Tree {
             return count;
         }
     }
-
+    
 // Utility Functions
-
     public void printTree(){
         PointerPSTNode node = root;
         printTree(node);

@@ -109,7 +109,7 @@ public class RestructuringAOPST implements Tree{
         count++;
 	if(nodeX.compareTo(xVal) == 0) { 
             node.incY();
-            int yVal = node.getY();
+            double yVal = node.getY();
             if (node.getParent() != null && node.getParent().getY() < yVal){
                 node = node.getParent();
                 while (node.getParent() != null && node.getParent().getY() < yVal)

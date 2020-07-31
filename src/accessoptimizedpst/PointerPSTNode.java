@@ -17,17 +17,17 @@ package accessoptimizedpst;
 
 public class PointerPSTNode implements Comparable<PointerPSTNode>{
     private Comparable x;
-    private int y;
+    private double y;
     private PointerPSTNode leftChild, rightChild, parent;
     private Comparable maxLeft;
 
-    public PointerPSTNode(Comparable x, int y) {
+    public PointerPSTNode(Comparable x, double y) {
 	this.x = x;
         this.y = y;
     }
     
     public Comparable getX() { return x; }
-    public int getY() { return y; }
+    public double getY() { return y; }
     public Comparable getMaxLeft() { return maxLeft; }
     public String getPoint() { return "(" + x +", " + y +")"; }
     public PointerPSTNode getLeftChild() { return leftChild; }

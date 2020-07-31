@@ -8,6 +8,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class ParetoTest extends Test {
     @Override
     void generateQueries() {
+        queries = new ArrayList<>();
         int twentyPercent = (int) Math.floor(numKeys*0.2);
         int eightyPercent = numKeys - twentyPercent;
         
@@ -49,5 +50,24 @@ public class ParetoTest extends Test {
     @Override
     void setName() {
         testName = "Pareto Distribution: ";
+    }
+    
+    @Override
+    public void searchAndWrite() {
+        int bstTotal = 0;
+        int splayTotal = 0;
+        int aopstTotal = 0;
+        for (Comparable query : queries) {
+            aopstTotal += aopst.find(query);
+            bstTotal += bst.find(query);
+            splayTotal += splayTree.find(query);
+        }
+        float bstAvg = (float)bstTotal/(numQueries);
+        float splayAvg = (float)splayTotal/(numQueries);
+        float aopstAvg = (float)aopstTotal/(numQueries);
+        
+        String dbSize = Integer.toString(numKeys/1000) + "k";
+        System.out.printf("%-9s|%-9.4f|%-9.4f|%-9.4f|\n", dbSize, bstAvg, splayAvg, aopstAvg);
+        System.out.println("_________|_________|_________|_________|");
     }
 }

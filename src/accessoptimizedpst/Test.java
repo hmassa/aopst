@@ -24,29 +24,18 @@ public abstract class Test {
         System.out.println("_________|_________|_________|_________|");
     }
     
-    public void searchAndWrite() {
-        int bstTotal = 0;
-        int splayTotal = 0;
-        int aopstTotal = 0;
-        for (Comparable query : queries) {
-            aopstTotal += aopst.find(query);
-            bstTotal += bst.find(query);
-            splayTotal += splayTree.find(query);
-        }
-        float bstAvg = (float)bstTotal/(numQueries);
-        float splayAvg = (float)splayTotal/(numQueries);
-        float aopstAvg = (float)aopstTotal/(numQueries);
-        
-        String dbSize = Integer.toString(numKeys/1000) + "k";
-        System.out.printf("%-9s|%-9.4f|%-9.4f|%-9.4f|\n", dbSize, bstAvg, splayAvg, aopstAvg);
-        System.out.println("_________|_________|_________|_________|");
-    }
-    
     public void setKeySize(int keys) {
         this.numKeys = keys;
     }
     
+    public void run() {
+        generateQueries();
+        generateTrees();
+        searchAndWrite();
+    }
+    
     abstract void generateQueries();
     abstract void generateTrees();
+    abstract void searchAndWrite();
     abstract void setName();
 }

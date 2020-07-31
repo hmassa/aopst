@@ -18,8 +18,7 @@ public class SplayTree implements Tree {
 	    return;
 	}
 	splay(key, 0);
-	if ((c = key.compareTo(root.key)) == 0) {
-	    //	    throw new DuplicateItemException(x.toString());	    
+	if ((c = key.compareTo(root.key)) == 0) {    
 	    return;
 	}
 	n = new Node(key);
@@ -51,12 +50,12 @@ public class SplayTree implements Tree {
 	}
     }
 
+    @Override
     public int find(Comparable key) {
 	if (root == null) {
             return 0;
         } else {
-            int comparisons = splay(key, 0);
-            return comparisons;
+            return splay(key, 0); 
         }
     }
 
