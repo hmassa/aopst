@@ -11,10 +11,10 @@ import java.util.concurrent.ThreadLocalRandom;
 /**
  * @author flipp
  */
-public class CoinTossTest extends Test{
+public class ParamTest extends Test{
     private ArrayList<Integer> keys;
     private int[] queryKeys;
-    private double p = 0;
+    private double p = 0.75;
     private int expQueries;
     private int uniformQueries;
     
@@ -29,7 +29,6 @@ public class CoinTossTest extends Test{
         queryKeys = new int[64];
         for (int i = 0; i < 64; i++){
             queryKeys[i] = keys.get(i);
-//            queryKeys[i] = i+1;
         }
 
         numQueries = 1000000000;
@@ -51,21 +50,13 @@ public class CoinTossTest extends Test{
             splayTree.insert(queryVal);
         }
         
-//        for (int i = expQueries; i < numQueries; i++){
-//            double priority = 1/numQueries;
-//            int queryVal = keys.get(i);
-//            pstNodes.add(new PointerPSTNode(queryVal, priority));
-//            bstNodes.add(queryVal);
-//            splayTree.insert(queryVal); 
-//        }
-        
         aopst = new StaticAOPST(pstNodes);
         bst = new BalancedBST(bstNodes);
     }
 
     @Override
     void setName() {
-        testName = "Coin Toss Test: ";
+        testName = "Parameterized Distribution Test: ";
     }
     
     private int tossCoin() {
@@ -91,12 +82,12 @@ public class CoinTossTest extends Test{
         long splayTotal = 0;
         long aopstTotal = 0;
         
-//        for (int i = 0; i < expQueries; i++) {
-//            int query = queryKeys[tossCoin()];
-//            aopstTotal += aopst.find(query);
-//            bstTotal += bst.find(query);
-//            splayTotal += splayTree.find(query);
-//        }
+        for (int i = 0; i < expQueries; i++) {
+            int query = queryKeys[tossCoin()];
+            aopstTotal += aopst.find(query);
+            bstTotal += bst.find(query);
+            splayTotal += splayTree.find(query);
+        }
         
         for (int i = 0; i < uniformQueries; i++){
             int query = ThreadLocalRandom.current().nextInt(0, numKeys);

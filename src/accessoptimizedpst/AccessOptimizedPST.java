@@ -6,7 +6,7 @@ import java.io.IOException;
  */
 public class AccessOptimizedPST{
     public static void main(String[] args) throws IOException{
-        Test test = new CoinTossTest();
+        Test test = new ParamTest();
         
         test.createChart();
         
