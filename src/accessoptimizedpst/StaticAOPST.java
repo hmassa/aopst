@@ -109,12 +109,14 @@ public class StaticAOPST implements Tree {
         }
         int diff = node.getX().compareTo(xVal);
         count++;
+        
 	if(diff == 0) { 
             return count;
 	} else {
             PointerPSTNode leftChild = node.getLeftChild();
             if(leftChild != null) {
                 int direction = node.getMaxLeft().compareTo(xVal);
+                
                 count++;
                 if(direction >= 0)
                     return aopstSearch(xVal, leftChild, count); 

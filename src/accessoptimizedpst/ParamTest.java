@@ -13,16 +13,19 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public class ParamTest extends Test{
     private ArrayList<Integer> keys;
+    private ArrayList<PointerPSTNode> restNodes;
     private int[] queryKeys;
-    private double p = 0.75;
+    private double p = 1;
     private int expQueries;
     private int uniformQueries;
     
     @Override
     void generateQueries() {
         keys = new ArrayList<>();
+        restNodes = new ArrayList<>();
         for (int i = 1; i <= numKeys; i++) {
             keys.add(i);
+            restNodes.add(new PointerPSTNode(i, 0));
         }
         Collections.shuffle(keys);
         
@@ -31,7 +34,7 @@ public class ParamTest extends Test{
             queryKeys[i] = keys.get(i);
         }
 
-        numQueries = 1000000000;
+        numQueries = 1000000;
         expQueries  = (int) Math.floor(numQueries*p);
         uniformQueries = numQueries - expQueries;
     }
@@ -40,18 +43,16 @@ public class ParamTest extends Test{
     void generateTrees() {
         splayTree = new SplayTree();
         ArrayList<PointerPSTNode> pstNodes = new ArrayList<>();
-        ArrayList<Comparable> bstNodes = new ArrayList<>();
 
         for (int i = 0; i < numKeys; i++){
             double priority = (double)numQueries/Math.pow(2, i+1);
             int queryVal = keys.get(i);
             pstNodes.add(new PointerPSTNode(queryVal, priority));
-            bstNodes.add(queryVal);
             splayTree.insert(queryVal);
         }
         
-        aopst = new StaticAOPST(pstNodes);
-        bst = new BalancedBST(bstNodes);
+        stat = new StaticAOPST(pstNodes);
+        rest = new RestructuringAOPST(restNodes);
     }
 
     @Override
@@ -78,30 +79,30 @@ public class ParamTest extends Test{
     
     @Override
     public void searchAndWrite() {
-        long bstTotal = 0;
         long splayTotal = 0;
-        long aopstTotal = 0;
+        long restTotal = 0;
+        long statTotal = 0;
         
         for (int i = 0; i < expQueries; i++) {
             int query = queryKeys[tossCoin()];
-            aopstTotal += aopst.find(query);
-            bstTotal += bst.find(query);
+            restTotal += rest.find(query);
+            statTotal += stat.find(query);
             splayTotal += splayTree.find(query);
         }
         
         for (int i = 0; i < uniformQueries; i++){
             int query = ThreadLocalRandom.current().nextInt(0, numKeys);
-            aopstTotal += aopst.find(query);
-            bstTotal += bst.find(query);
+            restTotal += rest.find(query);
+            statTotal += stat.find(query);
             splayTotal += splayTree.find(query);
         }
 
-        float bstAvg = (float)bstTotal/(numQueries);
+        float restAvg = (float)restTotal/(numQueries);
+        float statAvg = (float)statTotal/(numQueries);
         float splayAvg = (float)splayTotal/(numQueries);
-        float aopstAvg = (float)aopstTotal/(numQueries);
         
         String dbSize = Integer.toString(numKeys/1000) + "k";
-        System.out.printf("%-9s|%-9.5f|%-9.5f|%-9.5f|\n", dbSize, bstAvg, splayAvg, aopstAvg);
+        System.out.printf("%-9s|%-9.5f|%-9.5f|%-9.5f|\n", dbSize, splayAvg, restAvg, statAvg);
         System.out.println("_________|_________|_________|_________|");
     }
 }

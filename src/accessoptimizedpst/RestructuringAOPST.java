@@ -29,6 +29,7 @@ import java.util.*;
 
 public class RestructuringAOPST implements Tree{
     public PointerPSTNode root;
+    int count = 0;
     
     public RestructuringAOPST(ArrayList<PointerPSTNode> points) {
 	if(points == null) return;
@@ -61,9 +62,9 @@ public class RestructuringAOPST implements Tree{
         if (nodes.size() == 1){
             return nodes.get(0);
         }
-	// Find point with highest Y value
+        
 	PointerPSTNode rootNode = nodes.remove(0);
-	// Find median X value
+
         int numNodes = nodes.size();
         ArrayList<Comparable> xPoints = new ArrayList<>();
         for(PointerPSTNode node : nodes){
@@ -72,14 +73,15 @@ public class RestructuringAOPST implements Tree{
         Collections.sort(xPoints);
 	Comparable medianX = xPoints.get((int)floor((numNodes-1)/2));
         rootNode.setMaxLeft(medianX);
-	// Make upper and lower point array
+
 	ArrayList<PointerPSTNode> upperPoints = new ArrayList<>(); 
 	ArrayList<PointerPSTNode> lowerPoints = new ArrayList<>();
 	for(PointerPSTNode node : nodes) {
+            count++;
 	    if(node.getX().compareTo(medianX) <= 0) lowerPoints.add(node);
 	    else upperPoints.add(node);
 	}
-	// Make tree
+
         PointerPSTNode hold = null;
 	if(lowerPoints.size() > 0){
             hold = buildTree(lowerPoints);
@@ -96,18 +98,18 @@ public class RestructuringAOPST implements Tree{
 	return rootNode;
     }
     
+    @Override
     public int find(Comparable xVal){
-        int count = 0;
-	return aopstSearch(xVal, root, count);
+        count = 0;
+	return aopstSearch(xVal, root);
     }
-    private int aopstSearch(Comparable xVal, PointerPSTNode node, int count){
-        count++;
+    private int aopstSearch(Comparable xVal, PointerPSTNode node){
 	if(node == null) {
             return 0;
         }
-	Comparable nodeX = node.getX();
+        int diff = node.getX().compareTo(xVal);
         count++;
-	if(nodeX.compareTo(xVal) == 0) { 
+	if(diff == 0) { 
             node.incY();
             double yVal = node.getY();
             if (node.getParent() != null && node.getParent().getY() < yVal){
@@ -133,20 +135,17 @@ public class RestructuringAOPST implements Tree{
             return count;
 	} else {
             PointerPSTNode leftChild = node.getLeftChild();
-            count++;
             if(leftChild != null) {
-                Comparable nodeR = node.getMaxLeft();
+                int direction = node.getMaxLeft().compareTo(xVal);
                 count++;
-                if(0 <= nodeR.compareTo(xVal))
-                    return aopstSearch(xVal, leftChild, count);
+                if(direction >= 0)
+                    return aopstSearch(xVal, leftChild); 
                 else 
-                    return aopstSearch(xVal, node.getRightChild(), count);
+                    return aopstSearch(xVal, node.getRightChild());
             }
-            return 0;
+            return count;
         }
     }
-
-// Utility Functions
 
     public void printTree(){
         PointerPSTNode node = root;
