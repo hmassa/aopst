@@ -10,13 +10,13 @@ import java.util.Collections;
 public class BalancedBST implements Tree {
     public Node root; 
   
-    public BalancedBST(ArrayList<Comparable> points){
+    public BalancedBST(ArrayList<Integer> points){
         if (points == null) return;
-        Collections.sort(points);
+//        Collections.sort(points);
         this.root = sortedArrayToBST(points, 0, points.size()-1);
     }
     
-    private Node sortedArrayToBST(ArrayList<Comparable> points, int start, int end) { 
+    private Node sortedArrayToBST(ArrayList<Integer> points, int start, int end) { 
         if (start > end) { 
             return null; 
         } 

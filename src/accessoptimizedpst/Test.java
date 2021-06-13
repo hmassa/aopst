@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public abstract class Test {
     protected SplayTree splayTree;
     protected RestructuringAOPST rest;
-    protected StaticAOPST stat;
+    protected BalancedBST bst;
     
     protected ArrayList<Comparable> queries;
     protected String testName;
@@ -20,7 +20,7 @@ public abstract class Test {
         setName();
         System.out.println(testName);
         System.out.println("Average number of comparisons per search: ");
-        System.out.println(" DB Size |  Splay  |Restruct | Static  |");
+        System.out.println(" DB Size |  Splay  |Restruct | BST  |");
         System.out.println("_________|_________|_________|_________|");
     }
     

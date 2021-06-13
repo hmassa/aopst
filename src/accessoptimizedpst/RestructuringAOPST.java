@@ -31,141 +31,177 @@ public class RestructuringAOPST implements Tree{
     public PointerPSTNode root;
     int count = 0;
     
-    public RestructuringAOPST(ArrayList<PointerPSTNode> points) {
-	if(points == null) return;
-	Collections.sort(points); // Sort by y-coordinate in decreasing order
-	this.root = buildTree(points);
+    public RestructuringAOPST(ArrayList<Integer> xVals) {
+	if(xVals.isEmpty()) return;
+        Collections.sort(xVals);
+	this.root = buildTree(xVals, 0, xVals.size(), null);
     }
-/******************************************************************************
-* Given a list of valid points P ordered by y-coordinate in decreasing        *
-* order, determines a median which bisects the remaining points, then         *
-* builds:                                                                     *
-*                                                                             *
-*   root: point with lowest y-value                                           *
-*   left child:  {p ∈ (P - root) | p.x <= medianX}                            *
-*   right child: {p ∈ (P - root) | p.x >  medianX}                            *
-*                                                                             *
-* Note: points are also assumed to have distinct coordinates, i.e. no         *
-*       two points have the same x coordinate and no two points have          *
-*       the same y coordinate.                                                *
-*                                                                             *
-*       While this may seem unrealistic, we can convert any indistinct        *
-*       coordinates by replacing all real coordinates with distinct           *
-*       coordinates from the composite-number space without any loss          *
-*       of generality.  See: Computational Geometry: Applications and         *
-*       Algorithms, de Berg et al.  Section 5.5.                              *
-*                                                                             *
-******************************************************************************/
-    // Assumes all points are valid (e.g. not null)
-    private PointerPSTNode buildTree(ArrayList<PointerPSTNode> nodes) {
-	if(nodes == null || nodes.size() < 1) return null;
-        if (nodes.size() == 1){
-            return nodes.get(0);
+
+    private PointerPSTNode buildTree(ArrayList<Integer> xVals, int minInd, int maxInd, PointerPSTNode parent) {
+        if (minInd >= maxInd){
+            return null;
         }
         
-	PointerPSTNode rootNode = nodes.remove(0);
-
-        int numNodes = nodes.size();
-        ArrayList<Comparable> xPoints = new ArrayList<>();
-        for(PointerPSTNode node : nodes){
-	    xPoints.add(node.getX());
-        }
-        Collections.sort(xPoints);
-	Comparable medianX = xPoints.get((int)floor((numNodes-1)/2));
-        rootNode.setMaxLeft(medianX);
-
-	ArrayList<PointerPSTNode> upperPoints = new ArrayList<>(); 
-	ArrayList<PointerPSTNode> lowerPoints = new ArrayList<>();
-	for(PointerPSTNode node : nodes) {
-            count++;
-	    if(node.getX().compareTo(medianX) <= 0) lowerPoints.add(node);
-	    else upperPoints.add(node);
-	}
-
-        PointerPSTNode hold = null;
-	if(lowerPoints.size() > 0){
-            hold = buildTree(lowerPoints);
-	    rootNode.setLeftChild(hold);
-            if (hold != null)
-                hold.setParent(rootNode);
-        }
-	if(upperPoints.size() > 0){
-            hold = buildTree(upperPoints);
-	    rootNode.setRightChild(hold);
-            if (hold != null)
-                hold.setParent(rootNode);
-        }
-	return rootNode;
+        int middle = (int) floor((maxInd + minInd)/2);
+        PointerPSTNode node = new PointerPSTNode();
+        node.parent = parent;
+        node.qx = xVals.get(middle);
+        node.qy = 0;
+        node.px = node.py = -1;
+        node.validP = false;
+        node.duplQ = false;
+        
+        node.left = buildTree(xVals, minInd, middle, node);
+        node.right = buildTree(xVals, middle + 1, maxInd, node);
+        
+        return node;       
     }
     
     @Override
     public int find(Comparable xVal){
         count = 0;
-	return aopstSearch(xVal, root);
-    }
-    private int aopstSearch(Comparable xVal, PointerPSTNode node){
-	if(node == null) {
-            return 0;
-        }
-        int diff = node.getX().compareTo(xVal);
-        count++;
-	if(diff == 0) { 
-            node.incY();
-            double yVal = node.getY();
-            if (node.getParent() != null && node.getParent().getY() < yVal){
-                node = node.getParent();
-                while (node.getParent() != null && node.getParent().getY() < yVal)
-                    node = node.getParent();
-    
-                PointerPSTNode parent = node.getParent();
-                
-                ArrayList<PointerPSTNode> points = new ArrayList<>();
-                treeToArray(node, points);
-                Collections.sort(points);
-                
-                PointerPSTNode tree = buildTree(points);
-                tree.setParent(parent);
-                if (parent == null)
-                    root = tree;
-                else if (parent.getLeftChild().equals(node))
-                    parent.setLeftChild(tree);
-                else
-                    parent.setRightChild(tree);
-            }
-            return count;
-	} else {
-            PointerPSTNode leftChild = node.getLeftChild();
-            if(leftChild != null) {
-                int direction = node.getMaxLeft().compareTo(xVal);
+        PointerPSTNode node = this.root;
+        int diff;
+	
+        while (node != null){
+            if (node.validP) {
+                diff = xVal.compareTo(node.px);
                 count++;
-                if(direction >= 0)
-                    return aopstSearch(xVal, leftChild); 
-                else 
-                    return aopstSearch(xVal, node.getRightChild());
+                if (diff == 0) {
+                    increment(node, true);
+                    return count;
+                }
             }
-            return count;
+            
+            diff = xVal.compareTo(node.qx);
+            count++;
+
+            if (diff == 0) {
+                increment(node, false);
+                return count;
+            } else if (diff > 0) {
+                node = node.right;
+            } else {
+                node = node.left;
+            }
+        }
+        return count;
+    }
+    
+    private void increment(PointerPSTNode node, boolean p) {
+        Comparable xHold;
+        int yHold;
+        Comparable xCurr;
+        int yCurr;
+        
+        if (p) {
+            node.py++;
+            PointerPSTNode hold_node = node;
+            
+            while(hold_node != null) {
+                int diff = node.px.compareTo(hold_node.qx);
+                count++;
+                
+                if (diff > 0){
+                    hold_node = hold_node.right;
+                } else if (diff < 0) {
+                    hold_node = hold_node.left;
+                } else {
+                    hold_node.qy++;
+                    break;
+                }
+            }            
+
+            hold_node = node;
+            int diff = node.py - node.parent.py;
+            count++;
+            
+            while (diff > 0) {
+                node = node.parent;
+                if (node.parent == null) {
+                    break;
+                }
+                
+                diff = node.py - node.parent.py;
+                count++;
+            }
+            
+            xCurr = hold_node.px;
+            yCurr = hold_node.py;
+            
+            while(true) {
+                if (!node.validP) {
+                    node.px = xCurr;
+                    node.py = yCurr;
+                    break;
+                }
+                
+                xHold = node.px;
+                yHold = node.py;
+                node.px = xCurr;
+                node.py = yCurr;
+                xCurr = xHold;
+                yCurr = yHold;
+
+                diff = xCurr.compareTo(node.qx);
+                if (diff == 0) {
+                    break;
+                } else if (diff > 0) {
+                    node = node.right;
+                } else {
+                    node = node.left;
+                }
+            }
+            
+        } else {
+            node.qy++;
+            xCurr = node.qx;
+            yCurr = node.qy;
+            node = this.root;
+            
+            while (true) {
+                count++;
+                int diff = xCurr.compareTo(node.qx);
+                if (diff == 0) {
+                    break;
+                }
+                
+                if (!node.validP) {
+                    node.py = yCurr;
+                    node.px = xCurr;
+                    node.validP = true;
+                    break;
+                } else if (yCurr <= node.py) {
+                    count++;
+                    if (diff > 0) {
+                        node = node.right;
+                    } else {
+                        node = node.left;
+                    }
+                } else {
+                    count++;
+                    
+                    xHold = node.px;
+                    yHold = node.py;
+                    node.px = xCurr;
+                    node.py = yCurr;
+                    
+                    xCurr = xHold;
+                    yCurr = yHold;
+                    
+                    diff = xCurr.compareTo(node.qx);
+                    count++;
+                    
+                    if (diff == 0) {
+                        break;
+                    } else if (diff > 0) {
+                        node = node.right;
+                    } else {
+                        node = node.left;
+                    }
+                }
+            } 
         }
     }
 
-    public void printTree(){
-        PointerPSTNode node = root;
-        printTree(node);
-    }
-    
-    private void printTree(PointerPSTNode node){
-        if (node != null) {
-            printTree(node.getLeftChild());
-            printTree(node.getRightChild());
-            System.out.println(node.getPoint());
-        }
-    }
-    
-    private void treeToArray(PointerPSTNode node, ArrayList<PointerPSTNode> points) {
-        if (node != null){
-            treeToArray(node.getLeftChild(), points);
-            treeToArray(node.getRightChild(), points);
-            node.clear();
-            points.add(node);
-        }
-    }
 }
