@@ -21,7 +21,6 @@ public class PointerPSTNode {
     Comparable qx;
     int qy;
     boolean validP;
-    boolean duplQ;
     PointerPSTNode left;
     PointerPSTNode right;
     PointerPSTNode parent;

@@ -24,7 +24,7 @@ public class ParamTest extends Test{
         for (int i = 1; i <= numKeys; i++) {
             keys.add(i);
         }
-        Collections.shuffle(keys);
+//        Collections.shuffle(keys);
         
         queryKeys = new int[64];
         for (int i = 0; i < 64; i++){
@@ -50,7 +50,7 @@ public class ParamTest extends Test{
 
     @Override
     void setName() {
-        testName = "Parameterized Distribution Test: ";
+        testName = "Parameterized Distribution Test - P = " + p;
     }
     
     private int tossCoin() {

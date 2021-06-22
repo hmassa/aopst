@@ -49,7 +49,6 @@ public class RestructuringAOPST implements Tree{
         node.qy = 0;
         node.px = node.py = -1;
         node.validP = false;
-        node.duplQ = false;
         
         node.left = buildTree(xVals, minInd, middle, node);
         node.right = buildTree(xVals, middle + 1, maxInd, node);
@@ -91,116 +90,125 @@ public class RestructuringAOPST implements Tree{
     private void increment(PointerPSTNode node, boolean p) {
         Comparable xHold;
         int yHold;
-        Comparable xCurr;
-        int yCurr;
         
         if (p) {
             node.py++;
-            PointerPSTNode hold_node = node;
-            
-            while(hold_node != null) {
-                int diff = node.px.compareTo(hold_node.qx);
-                count++;
-                
-                if (diff > 0){
-                    hold_node = hold_node.right;
-                } else if (diff < 0) {
-                    hold_node = hold_node.left;
-                } else {
-                    hold_node.qy++;
-                    break;
-                }
-            }            
 
-            hold_node = node;
-            int diff = node.py - node.parent.py;
-            count++;
-            
-            while (diff > 0) {
-                node = node.parent;
-                if (node.parent == null) {
-                    break;
-                }
-                
-                diff = node.py - node.parent.py;
-                count++;
+            if (node.parent == null || node.py <= node.parent.py) {
+                return;
             }
             
-            xCurr = hold_node.px;
-            yCurr = hold_node.py;
+            xHold = node.px;
+            yHold = node.py;
+            deleteP(node);
+        } else {
+            if (node.parent == null) {
+                return;
+            }
             
-            while(true) {
-                if (!node.validP) {
-                    node.px = xCurr;
-                    node.py = yCurr;
+            node.qy++;
+            xHold = node.qx;
+            yHold = node.qy;
+        } 
+        
+        insertP(xHold, yHold);
+    }
+    
+    private void deleteP(PointerPSTNode node){
+        while (true) {
+            if (node.right == null && node.left == null) {
+                node.px = -1;
+                node.py = -1;
+                node.validP = false;
+                break;
+            } else if (node.right == null) {
+                if (node.left.validP) {
+                    node.px = node.left.px;
+                    node.py = node.left.py;
+                    node = node.left;
+                } else {
+                    node.px = -1;
+                    node.py = -1;
+                    node.validP = false;
                     break;
                 }
-                
-                xHold = node.px;
-                yHold = node.py;
-                node.px = xCurr;
-                node.py = yCurr;
-                xCurr = xHold;
-                yCurr = yHold;
-
-                diff = xCurr.compareTo(node.qx);
-                if (diff == 0) {
-                    break;
-                } else if (diff > 0) {
+            } else if (node.left == null) {
+                if (node.right.validP) {
+                    node.px = node.right.px;
+                    node.py = node.right.py;
                     node = node.right;
                 } else {
-                    node = node.left;
-                }
-            }
-            
-        } else {
-            node.qy++;
-            xCurr = node.qx;
-            yCurr = node.qy;
-            node = this.root;
-            
-            while (true) {
-                count++;
-                int diff = xCurr.compareTo(node.qx);
-                if (diff == 0) {
+                    node.px = -1;
+                    node.py = -1;
+                    node.validP = false;
                     break;
                 }
-                
-                if (!node.validP) {
-                    node.py = yCurr;
-                    node.px = xCurr;
-                    node.validP = true;
-                    break;
-                } else if (yCurr <= node.py) {
+            } else {
+                if (node.right.validP && node.left.validP){
+                    int diff = node.right.py - node.left.py;
                     count++;
                     if (diff > 0) {
+                        node.px = node.right.px;
+                        node.py = node.right.py;
                         node = node.right;
                     } else {
+                        node.px = node.left.px;
+                        node.py = node.left.py;
                         node = node.left;
                     }
+                } else if (node.right.validP) {
+                    node.px = node.right.px;
+                    node.py = node.right.py;
+                    node = node.right;
+                } else if (node.left.validP) {
+                    node.px = node.left.px;
+                    node.py = node.left.py;
+                    node = node.left;
                 } else {
-                    count++;
-                    
-                    xHold = node.px;
-                    yHold = node.py;
-                    node.px = xCurr;
-                    node.py = yCurr;
-                    
-                    xCurr = xHold;
-                    yCurr = yHold;
-                    
-                    diff = xCurr.compareTo(node.qx);
-                    count++;
-                    
-                    if (diff == 0) {
-                        break;
-                    } else if (diff > 0) {
-                        node = node.right;
-                    } else {
-                        node = node.left;
-                    }
+                    node.px = -1;
+                    node.py = -1;
+                    node.validP = false;
+                    break;
                 }
-            } 
+            }
+        }
+    }
+    
+    private void insertP(Comparable xVal, int yVal){
+        Comparable xHold;
+        int yHold;
+        
+        PointerPSTNode node = this.root;
+        while(true) {
+            if (!node.validP){
+                node.px = xVal;
+                node.py = yVal;
+                node.validP = true;
+                break;
+            }
+            
+            int y_diff = yVal - node.py;
+            count++;
+            if (y_diff > 0) {
+                xHold = node.px;
+                yHold = node.py;
+                node.px = xVal;
+                node.py = yVal;
+                xVal = xHold;
+                yVal = yHold;
+            }
+            
+            int x_diff = xVal.compareTo(node.qx);
+            count++;
+
+            if (x_diff > 0)
+                node = node.right;
+            else if (x_diff < 0) 
+                node = node.left;
+            else{
+                node.qy = yVal;
+                break;
+            }
         }
     }
 
