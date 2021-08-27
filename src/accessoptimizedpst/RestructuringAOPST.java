@@ -29,6 +29,7 @@ import java.util.*;
 
 public class RestructuringAOPST implements Tree{
     public PointerPSTNode root;
+
     int count = 0;
     
     public RestructuringAOPST(ArrayList<Integer> xVals) {
@@ -64,17 +65,14 @@ public class RestructuringAOPST implements Tree{
 	
         while (node != null){
             if (node.validP) {
-                diff = xVal.compareTo(node.px);
-                count++;
+                diff = compareX(xVal, node.px);
                 if (diff == 0) {
                     increment(node, true);
                     return count;
                 }
             }
             
-            diff = xVal.compareTo(node.qx);
-            count++;
-
+            diff = compareX(xVal, node.qx);
             if (diff == 0) {
                 increment(node, false);
                 return count;
@@ -84,7 +82,7 @@ public class RestructuringAOPST implements Tree{
                 node = node.left;
             }
         }
-        return count;
+        return -1;
     }
     
     private void increment(PointerPSTNode node, boolean p) {
@@ -94,7 +92,7 @@ public class RestructuringAOPST implements Tree{
         if (p) {
             node.py++;
 
-            if (node.parent == null || node.py <= node.parent.py) {
+            if (node.parent == null || compareY(node.py, node.parent.py) <= 0) {
                 return;
             }
             
@@ -106,20 +104,22 @@ public class RestructuringAOPST implements Tree{
                 return;
             }
             
+            if (node.parent.validP && compareY(node.qy, node.parent.py) <= 0) {
+                return;
+            }
+            
             node.qy++;
             xHold = node.qx;
-            yHold = node.qy;
+            yHold = node.qy;    
         } 
         
-        insertP(xHold, yHold);
+        insertP(xHold, yHold, node);
     }
     
     private void deleteP(PointerPSTNode node){
         while (true) {
             if (node.right == null && node.left == null) {
-                node.px = -1;
-                node.py = -1;
-                node.validP = false;
+                clearP(node);
                 break;
             } else if (node.right == null) {
                 if (node.left.validP) {
@@ -127,9 +127,7 @@ public class RestructuringAOPST implements Tree{
                     node.py = node.left.py;
                     node = node.left;
                 } else {
-                    node.px = -1;
-                    node.py = -1;
-                    node.validP = false;
+                    clearP(node);
                     break;
                 }
             } else if (node.left == null) {
@@ -138,15 +136,12 @@ public class RestructuringAOPST implements Tree{
                     node.py = node.right.py;
                     node = node.right;
                 } else {
-                    node.px = -1;
-                    node.py = -1;
-                    node.validP = false;
+                    clearP(node);
                     break;
                 }
             } else {
                 if (node.right.validP && node.left.validP){
-                    int diff = node.right.py - node.left.py;
-                    count++;
+                    int diff = compareY(node.right.py, node.left.py);
                     if (diff > 0) {
                         node.px = node.right.px;
                         node.py = node.right.py;
@@ -165,51 +160,73 @@ public class RestructuringAOPST implements Tree{
                     node.py = node.left.py;
                     node = node.left;
                 } else {
-                    node.px = -1;
-                    node.py = -1;
-                    node.validP = false;
+                    clearP(node);
                     break;
                 }
             }
         }
     }
     
-    private void insertP(Comparable xVal, int yVal){
-        Comparable xHold;
-        int yHold;
+    private void insertP(Comparable xVal, int yVal, PointerPSTNode startNode){
+        PointerPSTNode current = startNode;
         
-        PointerPSTNode node = this.root;
-        while(true) {
-            if (!node.validP){
-                node.px = xVal;
-                node.py = yVal;
-                node.validP = true;
-                break;
-            }
-            
-            int y_diff = yVal - node.py;
-            count++;
-            if (y_diff > 0) {
-                xHold = node.px;
-                yHold = node.py;
-                node.px = xVal;
-                node.py = yVal;
-                xVal = xHold;
-                yVal = yHold;
-            }
-            
-            int x_diff = xVal.compareTo(node.qx);
-            count++;
-
-            if (x_diff > 0)
-                node = node.right;
-            else if (x_diff < 0) 
-                node = node.left;
-            else{
-                node.qy = yVal;
-                break;
-            }
+        while (current.parent != null && !current.parent.validP) {
+            current = current.parent;
         }
+
+        while (current.parent != null && compareY(yVal, current.parent.py) > 0) {
+            current = current.parent;
+        }
+
+        if (current.parent == null) {
+            current.px = xVal;
+            current.py = yVal;
+            current.validP = true;
+            return;
+        }
+        
+        floatDown(current);
+        current.px = xVal;
+        current.py = yVal;
+        current.validP = true;
+    }
+    
+    private void floatDown(PointerPSTNode current) {
+        PointerPSTNode child;
+        
+        if (!current.validP) {
+            return;
+        }
+        
+        int xDiff = compareX(current.px, current.qx);
+        if (xDiff > 0) {
+            child = current.right;
+        } else if (xDiff < 0){
+            child = current.left;
+        } else {
+            return;
+        }
+        
+        floatDown(child);
+        child.px = current.px;
+        child.py = current.py;
+        child.validP = true;
+    }
+    
+    private int compareX(Comparable a, Comparable b) {
+        count++;
+        return a.compareTo(b);
+    }
+    
+    private int compareY(int a, int b) {
+        count++;
+        return a - b;
+    }
+    
+    private void clearP(PointerPSTNode node) {
+        node.px = -1;
+        node.py = -1;
+        node.validP = false;
     }
 
 }

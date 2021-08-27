@@ -12,7 +12,7 @@ import java.util.concurrent.ThreadLocalRandom;
  * @author flipp
  */
 public class ParamTest extends Test{
-    private ArrayList<Integer> keys;
+    ArrayList<Integer> keys = new ArrayList<>();
     private int[] queryKeys;
     private double p = 1;
     private int expQueries;
@@ -20,11 +20,7 @@ public class ParamTest extends Test{
     
     @Override
     void generateQueries() {
-        keys = new ArrayList<>();
-        for (int i = 1; i <= numKeys; i++) {
-            keys.add(i);
-        }
-//        Collections.shuffle(keys);
+        Collections.shuffle(keys);
         
         queryKeys = new int[64];
         for (int i = 0; i < 64; i++){
@@ -38,13 +34,19 @@ public class ParamTest extends Test{
 
     @Override
     void generateTrees() {
+        keys = new ArrayList<>();
+        for (int i = 1; i <= numKeys; i++) {
+            keys.add(i);
+        }
+        
         bst = new BalancedBST(keys);
         rest = new RestructuringAOPST(keys);
         splayTree = new SplayTree();
+        
+        Collections.shuffle(keys);
 
         for (int i = 0; i < numKeys; i++){
-            int queryVal = keys.get(i);
-            splayTree.insert(queryVal);
+            splayTree.insert(keys.get(i));
         }
     }
 
@@ -75,19 +77,43 @@ public class ParamTest extends Test{
         long splayTotal = 0;
         long restTotal = 0;
         long bstTotal = 0;
+        int query;
+        int splayHold;
+        int restHold;
+        int bstHold;
         
         for (int i = 0; i < expQueries; i++) {
-            int query = queryKeys[tossCoin()];
-            restTotal += rest.find(query);
-            bstTotal += bst.find(query);
-            splayTotal += splayTree.find(query);
+            query = queryKeys[tossCoin()];
+            
+            splayHold = splayTree.find(query);
+            restHold = rest.find(query);
+            bstHold = bst.find(query);
+            
+            if (restHold > -1 && bstHold > -1 && splayHold > -1) {
+                restTotal += restHold;
+                bstTotal += bstHold;
+                splayTotal += splayHold;
+            } else {
+                System.out.println("Out of bounds error");
+                return;
+            }
         }
         
         for (int i = 0; i < uniformQueries; i++){
-            int query = ThreadLocalRandom.current().nextInt(0, numKeys);
-            restTotal += rest.find(query);
-            bstTotal += bst.find(query);
-            splayTotal += splayTree.find(query);
+            query = ThreadLocalRandom.current().nextInt(0, numKeys);
+            
+            splayHold = splayTree.find(query);
+            restHold = rest.find(query);
+            bstHold = bst.find(query);
+            
+            if (restHold > -1 && bstHold > -1 && splayHold > -1) {
+                restTotal += rest.find(query);
+                bstTotal += bst.find(query);
+                splayTotal += splayTree.find(query);
+               } else {
+                System.out.println("Out of bounds error");
+                return;
+            }
         }
 
         float restAvg = (float)restTotal/(numQueries);

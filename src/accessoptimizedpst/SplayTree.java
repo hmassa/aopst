@@ -6,6 +6,8 @@ package accessoptimizedpst;
 
 public class SplayTree implements Tree {
     private Node root;
+    private int count = 0;
+    
     public SplayTree() {
         root = null;
     }
@@ -17,7 +19,7 @@ public class SplayTree implements Tree {
 	    root = new Node(key);
 	    return;
 	}
-	splay(key, 0);
+	splay(key);
 	if ((c = key.compareTo(root.key)) == 0) {    
 	    return;
 	}
@@ -36,7 +38,7 @@ public class SplayTree implements Tree {
 
     public void delete(Comparable key) {
 	Node x;
-	splay(key, 0);
+	splay(key);
 	if (key.compareTo(root.key) != 0) {
 	    return;
 	}
@@ -45,17 +47,18 @@ public class SplayTree implements Tree {
 	} else {
 	    x = root.right;
 	    root = root.left;
-	    splay(key, 0);
+	    splay(key);
 	    root.right = x;
 	}
     }
 
     @Override
     public int find(Comparable key) {
-	if (root == null) {
+	count = 0;
+        if (root == null) {
             return 0;
         } else {
-            return splay(key, 0); 
+            return splay(key); 
         }
     }
 
@@ -80,18 +83,16 @@ public class SplayTree implements Tree {
      *   in the delete() method.
      */
 
-    private int splay(Comparable key, int count) {
+    private int splay(Comparable key) {
 	Node l, r, t, y;
 	l = r = header;
 	t = root;
 	header.left = header.right = null;
 	for (;;) {
-            int diff = key.compareTo(t.key);
-            count++;
+            int diff = compare(key, t.key);
 	    if (diff < 0) {
 		if (t.left == null) break;
-                count++;
-		if (key.compareTo(t.left.key) < 0) {
+		if (compare(key,t.left.key) < 0) {
 		    y = t.left;                            /* rotate right */
 		    t.left = y.right;
 		    y.right = t;
@@ -103,8 +104,7 @@ public class SplayTree implements Tree {
 		t = t.left;
 	    } else if (diff > 0) {
 		if (t.right == null) break;
-                count++;
-		if (key.compareTo(t.right.key) > 0) {
+		if (compare(key, t.right.key) > 0) {
 		    y = t.right;                            /* rotate left */
 		    t.right = y.left;
 		    y.left = t;
@@ -123,6 +123,15 @@ public class SplayTree implements Tree {
 	t.left = header.right;
 	t.right = header.left;
 	root = t;
-        return count;
+        
+        if (t.key == key)
+            return count;
+        else 
+            return -1;
+    }
+    
+    private int compare(Comparable a, Comparable b) {
+        count++;
+        return a.compareTo(b);
     }
 }

@@ -20,7 +20,7 @@ public abstract class Test {
         setName();
         System.out.println(testName);
         System.out.println("Average number of comparisons per search: ");
-        System.out.println(" DB Size |  Splay  | AAPST   | BST  |");
+        System.out.println(" DB Size |  Splay  | AAPST   |   BST   |");
         System.out.println("_________|_________|_________|_________|");
     }
     
@@ -29,8 +29,8 @@ public abstract class Test {
     }
     
     public void run() {
-        generateQueries();
         generateTrees();
+        generateQueries();
         searchAndWrite();
     }
     

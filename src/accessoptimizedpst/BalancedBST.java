@@ -12,7 +12,7 @@ public class BalancedBST implements Tree {
   
     public BalancedBST(ArrayList<Integer> points){
         if (points == null) return;
-//        Collections.sort(points);
+        Collections.sort(points);
         this.root = sortedArrayToBST(points, 0, points.size()-1);
     }
     
@@ -44,7 +44,7 @@ public class BalancedBST implements Tree {
                 return count; 
             }
         } 
-        return count;
+        return -1;
     }
     
     public void preOrder(Node node) { 
