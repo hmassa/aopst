@@ -29,8 +29,8 @@ public abstract class Test {
     }
     
     public void run() {
-        generateQueries();
         generateTrees();
+        generateQueries();
         searchAndWrite();
     }
     

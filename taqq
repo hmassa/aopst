@@ -1,0 +1,201 @@
+[33mcommit 3e453f4df6882f55b89a76d4eb4b9b16581f1792[m[33m ([m[1;36mHEAD -> [m[1;32mrewrite[m[33m, [m[1;31morigin/rewrite[m[33m)[m
+Merge: ed00124 912f067
+Author: Haley <hemxvc@umsystem.edu>
+Date:   Sat Sep 11 19:44:31 2021 -0700
+
+    fixed merge conflicts
+
+[33mcommit 912f067ca4ebc5642be66aa014355a96d8eb2d20[m
+Author: Haley <hemxvc@umsystem.edu>
+Date:   Sat Sep 11 19:38:39 2021 -0700
+
+    fixed splay issue
+
+[33mcommit ed0012456098df9bba4c57fb5738af502a9c0aa8[m[33m ([m[1;31morigin/master[m[33m, [m[1;32mmaster[m[33m)[m
+Author: Haley <hemxvc@umsystem.edu>
+Date:   Thu Aug 26 18:35:15 2021 -0700
+
+    Final code (for now)
+
+[33mcommit 2c1c100ae219e734895a60cc5896692ae4970ecd[m
+Author: Haley <hemxvc@umsystem.edu>
+Date:   Mon Jun 21 20:34:36 2021 -0500
+
+    rewrite code complete
+
+[33mcommit 831c723442c807eb381c396eaa9e7d9e46ef3edb[m
+Author: Haley <hemxvc@umsystem.edu>
+Date:   Sun Jun 13 18:13:48 2021 -0500
+
+    Attempt 1
+
+[33mcommit cd72abca87cba4e0ab949c5ab8c296eb82c6aa4c[m[33m ([m[1;31morigin/cleaning[m[33m, [m[1;32mcleaning[m[33m)[m
+Author: Haley <hemxvc@umsystem.edu>
+Date:   Thu May 27 17:28:23 2021 -0500
+
+    removed unused tests
+
+[33mcommit e50423a34a0e5010b7ad4ceedc3d96ec5910842a[m[33m ([m[1;31morigin/restructuring[m[33m, [m[1;32mrestructuring[m[33m)[m
+Author: Haley <hemxvc@umsystem.edu>
+Date:   Thu May 27 17:23:12 2021 -0500
+
+    restructuring tree completed
+
+[33mcommit d51c1b295cfede410b7ecfe623c710116565e3e4[m
+Author: Haley Massa <hemxvc@mail.missouri.edu>
+Date:   Mon Aug 10 12:34:47 2020 -0500
+
+    deleted unused files
+
+[33mcommit b0923d6f106d85140aa81db9963470d56aefe5cd[m
+Author: Haley Massa <hemxvc@mail.missouri.edu>
+Date:   Fri Jul 31 13:23:02 2020 -0500
+
+    unifrom test
+
+[33mcommit 91b6ddcf86b05556b20515cf1b2d1ef37f981789[m
+Author: Haley Massa <hemxvc@mail.missouri.edu>
+Date:   Tue Jul 28 20:36:44 2020 -0500
+
+    added actual coin toss method
+
+[33mcommit 2a57ca6fbf431fe5487921c43a65b765d2735ada[m
+Author: Haley Massa <hemxvc@mail.missouri.edu>
+Date:   Tue Jul 28 14:58:02 2020 -0500
+
+    logical error fixes
+
+[33mcommit 248e395c8ee04cefb50a7c88495e7748c4be7966[m
+Author: Haley Massa <hemxvc@mail.missouri.edu>
+Date:   Tue Jul 28 14:03:18 2020 -0500
+
+    coin toss test
+
+[33mcommit 3f6761e032bb766734b01e999c5fac46a404fc4c[m
+Merge: 8000179 8f6fa98
+Author: Haley Massa <hemxvc@mail.missouri.edu>
+Date:   Tue Jul 28 10:40:41 2020 -0500
+
+    Merge branch 'master' of https://github.com/hmassa/aopst
+
+[33mcommit 80001795a74248b9b94c0b3709a6cef669b3001f[m
+Author: Haley Massa <hemxvc@mail.missouri.edu>
+Date:   Tue Jul 28 10:40:29 2020 -0500
+
+    fixed key count method
+
+[33mcommit 8f6fa98ca7d5cf38d493dc5f25715de957e21587[m
+Author: Haley <49661740+hmassa@users.noreply.github.com>
+Date:   Fri Jul 24 12:17:01 2020 -0500
+
+    Update README.md
+
+[33mcommit 8a6ba378a009fd1957e871f08a598983a4478427[m
+Author: Haley Massa <hemxvc@mail.missouri.edu>
+Date:   Fri Jul 24 11:42:16 2020 -0500
+
+    Reran splay tree tests using new AOPST structure
+
+[33mcommit e1a42c6797d887105693554733317db33a590667[m
+Author: Haley Massa <hemxvc@mail.missouri.edu>
+Date:   Fri Jul 24 11:05:41 2020 -0500
+
+    Balanced BST comparison added
+
+[33mcommit e5972c0291afd00c983d5d53a9dac743ab48c640[m
+Author: hmassa <49661740+hmassa@users.noreply.github.com>
+Date:   Fri Jul 10 16:09:48 2020 -0500
+
+    Update README.md
+
+[33mcommit b3f679d088087555869b4db3d0cdbc3c6fab05ca[m[33m ([m[1;32mtest[m[33m)[m
+Author: Haley Massa <hemxvc@mail.missouri.edu>
+Date:   Fri Jul 10 15:53:53 2020 -0500
+
+    restructured tests and added Zipf
+
+[33mcommit 01b6f9fde188f979db185a31517719346dfc7ecc[m
+Author: Haley Massa <hemxvc@mail.missouri.edu>
+Date:   Thu Jul 9 22:36:17 2020 -0500
+
+    added tests on uniform and normally dist data
+
+[33mcommit 041fe484969feb9fc45cd50970bb6fc8c42daa3d[m
+Author: Haley Massa <hemxvc@mail.missouri.edu>
+Date:   Thu Jul 9 22:00:51 2020 -0500
+
+    separated tests into individual classes
+
+[33mcommit c1ee76ffca8b2e50b4f56e3c860f5b46c18d9b52[m
+Merge: 314672a 1a9b535
+Author: Haley Massa <hemxvc@mail.missouri.edu>
+Date:   Thu Jul 9 17:33:00 2020 -0500
+
+    Merge branch 'master' of https://github.com/hmassa/aopst
+
+[33mcommit 314672ac1e0af43b32226a9e1012dc3a9520ad43[m
+Author: Haley Massa <hemxvc@mail.missouri.edu>
+Date:   Thu Jul 9 17:32:43 2020 -0500
+
+    Added script searching
+
+[33mcommit 1a9b53546971ae02d2a86f30652209091b292b2c[m
+Author: hmassa <49661740+hmassa@users.noreply.github.com>
+Date:   Thu Jul 9 11:21:42 2020 -0500
+
+    Update README.md
+
+[33mcommit 575cdc9059efd072b2ed21b420dcc7dd78aa7631[m
+Author: hmassa <49661740+hmassa@users.noreply.github.com>
+Date:   Thu Jul 9 11:07:43 2020 -0500
+
+    Update README.md
+
+[33mcommit c7f4bb8a47e09cd48e6cc0cd6a2835037c4ac5eb[m
+Author: Haley Massa <hemxvc@mail.missouri.edu>
+Date:   Wed Jul 8 15:13:37 2020 -0500
+
+    added poem character tree
+
+[33mcommit ad499b47b74200b627193693f365aabe9069ce68[m
+Merge: f2e44f6 957717a
+Author: Haley Massa <hemxvc@mail.missouri.edu>
+Date:   Mon Jul 6 15:37:10 2020 -0500
+
+    Merge branch 'master' of https://github.com/hmassa/aopst
+
+[33mcommit f2e44f6bea08b7b57e9d25e7b62a57f2cc2f3dde[m
+Author: Haley Massa <hemxvc@mail.missouri.edu>
+Date:   Mon Jul 6 15:36:51 2020 -0500
+
+    Added tree interface
+
+[33mcommit 957717a8b0a8ef0d884e18e1c2b6df0b5049c88e[m
+Author: hmassa <49661740+hmassa@users.noreply.github.com>
+Date:   Mon Jul 6 15:29:14 2020 -0500
+
+    Update README.md
+
+[33mcommit 07317fc9e24f0a494104df662669916adb366180[m
+Author: hmassa <49661740+hmassa@users.noreply.github.com>
+Date:   Mon Jul 6 15:27:46 2020 -0500
+
+    Create README.md
+
+[33mcommit 4b1e7add691d74290ae302a6534452a3ec7d04d2[m
+Author: Haley Massa <hemxvc@mail.missouri.edu>
+Date:   Mon Jul 6 15:22:29 2020 -0500
+
+    Added text and result files
+
+[33mcommit 9c828af6ded8076f7fd1c6bb070628a01dc30577[m[33m ([m[1;32mcombine[m[33m)[m
+Author: Haley Massa <hemxvc@mail.missouri.edu>
+Date:   Mon Jul 6 14:59:18 2020 -0500
+
+    Working for character, population
+
+[33mcommit 69174f465511f4cd540b2d6715041fffc4fc2508[m
+Author: Haley Massa <hemxvc@mail.missouri.edu>
+Date:   Mon Jul 6 14:18:10 2020 -0500
+
+    initial commit

@@ -15,38 +15,39 @@ public class ParamTest extends Test{
     private ArrayList<Integer> keys;
     private int[] queryKeys;
     private double p = 1;
-    private int expQueries;
-    private int uniformQueries;
     
-    @Override
-    void generateQueries() {
+     @Override
+    void generateTrees() {
         keys = new ArrayList<>();
         for (int i = 1; i <= numKeys; i++) {
             keys.add(i);
         }
-//        Collections.shuffle(keys);
         
-        queryKeys = new int[64];
-        for (int i = 0; i < 64; i++){
-            queryKeys[i] = keys.get(i);
-        }
-
-        numQueries = 1000000;
-        expQueries  = (int) Math.floor(numQueries*p);
-        uniformQueries = numQueries - expQueries;
-    }
-
-    @Override
-    void generateTrees() {
         bst = new BalancedBST(keys);
         rest = new RestructuringAOPST(keys);
         splayTree = new SplayTree();
+        
+        Collections.shuffle(keys);
 
         for (int i = 0; i < numKeys; i++){
             int queryVal = keys.get(i);
             splayTree.insert(queryVal);
         }
     }
+    
+    @Override
+    void generateQueries() {
+        Collections.shuffle(keys);
+        
+        queryKeys = new int[64];
+        for (int i = 0; i < 64; i++){
+            queryKeys[i] = keys.get(i);
+        }
+
+        numQueries = 10000000;
+    }
+
+   
 
     @Override
     void setName() {
@@ -76,15 +77,17 @@ public class ParamTest extends Test{
         long restTotal = 0;
         long bstTotal = 0;
         
-        for (int i = 0; i < expQueries; i++) {
-            int query = queryKeys[tossCoin()];
-            restTotal += rest.find(query);
-            bstTotal += bst.find(query);
-            splayTotal += splayTree.find(query);
-        }
+        int query;
+        int random;
         
-        for (int i = 0; i < uniformQueries; i++){
-            int query = ThreadLocalRandom.current().nextInt(0, numKeys);
+        for (int i = 0; i < numQueries; i++) {
+            random = ThreadLocalRandom.current().nextInt(0, 100);
+            if (random > p*100) {
+                query = ThreadLocalRandom.current().nextInt(0, numKeys);
+            } else {
+                query = queryKeys[tossCoin()];
+            }
+            
             restTotal += rest.find(query);
             bstTotal += bst.find(query);
             splayTotal += splayTree.find(query);

@@ -1,6 +1,7 @@
 package accessoptimizedpst;
 
 import java.io.IOException;
+import java.text.NumberFormat;
 /**
  * @author flipp
  */
@@ -23,7 +24,9 @@ public class AccessOptimizedPST{
         test.run();
         
         System.out.println("");
-        System.out.println("*Averaged over 1,000,000,000 queries");    
+        
+        NumberFormat nf = NumberFormat.getInstance();
+        System.out.println("*Averaged over " + nf.format(test.numQueries) + " queries");    
 
     }
 }
