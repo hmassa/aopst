@@ -85,9 +85,15 @@ public class ParamTest extends Test{
         
         for (int i = 0; i < uniformQueries; i++){
             int query = ThreadLocalRandom.current().nextInt(0, numKeys);
-            restTotal += rest.find(query);
-            bstTotal += bst.find(query);
-            splayTotal += splayTree.find(query);
+            
+            if (restTotal*bstTotal*splayTotal > 0) {
+                restTotal += rest.find(query);
+                bstTotal += bst.find(query);
+                splayTotal += splayTree.find(query);
+            } else {
+                System.out.println("out of range");
+                return;
+            }
         }
 
         float restAvg = (float)restTotal/(numQueries);
