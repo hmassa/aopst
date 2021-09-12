@@ -77,41 +77,28 @@ public class ParamTest extends Test{
         long splayTotal = 0;
         long restTotal = 0;
         long bstTotal = 0;
+        
         int query;
+        int random;
+        
         int splayHold;
         int restHold;
         int bstHold;
         
-        for (int i = 0; i < expQueries; i++) {
-            query = queryKeys[tossCoin()];
-            
-            splayHold = splayTree.find(query);
-            restHold = rest.find(query);
-            bstHold = bst.find(query);
-            
-            if (restHold > -1 && bstHold > -1 && splayHold > -1) {
-                restTotal += restHold;
-                bstTotal += bstHold;
-                splayTotal += splayHold;
+        for (int i = 0; i < numQueries; i++) {
+            random = ThreadLocalRandom.current().nextInt(0, 100);
+            if (random > p*100) {
+                query = ThreadLocalRandom.current().nextInt(0, numKeys);
             } else {
-                System.out.println("Out of bounds error");
-                return;
+                query = queryKeys[tossCoin()];
             }
-        }
-        
-        for (int i = 0; i < uniformQueries; i++){
-            query = ThreadLocalRandom.current().nextInt(0, numKeys);
             
-            splayHold = splayTree.find(query);
-            restHold = rest.find(query);
-            bstHold = bst.find(query);
-            
-            if (restHold > -1 && bstHold > -1 && splayHold > -1) {
+            if (restTotal*bstTotal*splayTotal > 0) {
                 restTotal += rest.find(query);
                 bstTotal += bst.find(query);
                 splayTotal += splayTree.find(query);
-               } else {
-                System.out.println("Out of bounds error");
+            } else {
+                System.out.println("out of range");
                 return;
             }
         }
