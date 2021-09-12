@@ -46,9 +46,7 @@ public class ParamTest extends Test{
 
         numQueries = 10000000;
     }
-
-   
-
+    
     @Override
     void setName() {
         testName = "Parameterized Distribution Test - P = " + p;
@@ -73,6 +71,10 @@ public class ParamTest extends Test{
     
     @Override
     public void searchAndWrite() {
+        int splayHold;
+        int restHold;
+        int bstHold;
+        
         long splayTotal = 0;
         long restTotal = 0;
         long bstTotal = 0;
@@ -88,9 +90,18 @@ public class ParamTest extends Test{
                 query = queryKeys[tossCoin()];
             }
             
-            restTotal += rest.find(query);
-            bstTotal += bst.find(query);
-            splayTotal += splayTree.find(query);
+            restHold = rest.find(query);
+            bstHold = bst.find(query);
+            splayHold = splayTree.find(query);
+            
+            if (restHold*bstHold*splayHold > 0) {
+                restTotal += restHold;
+                splayTotal += splayHold;
+                bstTotal += bstHold;
+            } else {
+                System.out.println("error: not in tree");
+                return;
+            }
         }
 
         float restAvg = (float)restTotal/(numQueries);
