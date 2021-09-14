@@ -7,21 +7,21 @@ import java.text.NumberFormat;
  */
 public class AccessOptimizedPST{
     public static void main(String[] args) throws IOException{
-        Test test = new ParamTest();
+        Test test = new SplayWorstCase();    // ParamTest();
         
         test.createChart();
         
-        test.setKeySize(1000);
-        test.run();
+//        test.setKeySize(1000);
+//        test.run();
         
         test.setKeySize(10000);
         test.run();
         
-        test.setKeySize(100000);
-        test.run();
+//        test.setKeySize(100000);
+//        test.run();
         
-        test.setKeySize(1000000);
-        test.run();
+//        test.setKeySize(1000000);
+//        test.run();
         
         System.out.println("");
         
