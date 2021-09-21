@@ -64,16 +64,14 @@ public class RestructuringAOPST implements Tree{
 	
         while (node != null){
             if (node.validP) {
-                diff = xVal.compareTo(node.px);
-                count++;
+                diff = xCompare(xVal, node.px);
                 if (diff == 0) {
                     increment(node, true);
                     return count;
                 }
             }
             
-            diff = xVal.compareTo(node.qx);
-            count++;
+            diff = xCompare(xVal, node.qx);
 
             if (diff == 0) {
                 increment(node, false);
@@ -94,7 +92,7 @@ public class RestructuringAOPST implements Tree{
         if (p) {
             node.py++;
 
-            if (node.parent == null || node.py <= node.parent.py) {
+            if (node.parent == null || yCompare(node.py, node.parent.py) <= 0) {
                 return;
             }
             
@@ -145,8 +143,8 @@ public class RestructuringAOPST implements Tree{
                 }
             } else {
                 if (node.right.validP && node.left.validP){
-                    int diff = node.right.py - node.left.py;
-                    count++;
+                    int diff = yCompare(node.right.py, node.left.py);
+
                     if (diff > 0) {
                         node.px = node.right.px;
                         node.py = node.right.py;
@@ -187,8 +185,7 @@ public class RestructuringAOPST implements Tree{
                 break;
             }
             
-            int y_diff = yVal - node.py;
-            count++;
+            int y_diff = yCompare(yVal, node.py);
             if (y_diff > 0) {
                 xHold = node.px;
                 yHold = node.py;
@@ -198,8 +195,7 @@ public class RestructuringAOPST implements Tree{
                 yVal = yHold;
             }
             
-            int x_diff = xVal.compareTo(node.qx);
-            count++;
+            int x_diff = xCompare(xVal, node.qx);
 
             if (x_diff > 0)
                 node = node.right;
@@ -210,6 +206,16 @@ public class RestructuringAOPST implements Tree{
                 break;
             }
         }
+    }
+    
+    private int xCompare(Comparable a, Comparable b) {
+        count++;
+        return a.compareTo(b);
+    }
+    
+    private int yCompare(int a, int b) {
+        count++;
+        return a - b;
     }
 
 }

@@ -20,7 +20,9 @@ public class SplayTree implements Tree {
 	    return;
 	}
 	splay(key);
-	if ((c = key.compareTo(root.key)) == 0) {    
+        
+        c = compare(key, root.key);
+	if (c == 0) {    
 	    return;
 	}
 	n = new Node(key);
@@ -89,7 +91,6 @@ public class SplayTree implements Tree {
 		t = t.left;
 	    } else if (diff > 0) {
 		if (t.right == null) break;
-                count++;
 		if (compare(key, t.right.key) > 0) {
 		    y = t.right;                            /* rotate left */
 		    t.right = y.left;

@@ -52,7 +52,7 @@ public class SplayWorstCase extends Test {
             queryKeys[i] = keys.get(i);
         }
 
-        numQueries = 1000;
+        numQueries = 100000;
     }
     
     @Override
@@ -79,13 +79,11 @@ public class SplayWorstCase extends Test {
     
     @Override
     public void searchAndWrite() {
-        int splayHold;
-        int restHold;
-        int bstHold;
+        int splayHold, restHold, bstHold;
         
-        long splayTotal = 0;
-        long restTotal = 0;
-        long bstTotal = 0;
+        int splayMax = 0, restMax = 0, bstMax = 0;
+        
+        long splayTotal = 0, restTotal = 0, bstTotal = 0;
         
         int query;
         int random;
@@ -95,31 +93,42 @@ public class SplayWorstCase extends Test {
         try {
             file = new File("C:\\Users\\flipp\\Documents\\CompSci\\Research\\AOPST\\output.txt");
             fw = new FileWriter(file);
-            fw.write("AAPST,Splay,BST\n");
+            fw.write("Count,AAPST,Splay,BST\n");
             
-            for (int i = 0; i < numQueries; i++) {
-                random = ThreadLocalRandom.current().nextInt(0, 100);
-                if (random > p*100) {
-                    query = ThreadLocalRandom.current().nextInt(1, numKeys);
-                } else {
-                    query = queryKeys[tossCoin()];
+            for (int i = 0; i < numQueries/1000; i++) {
+                for (int j = 0; j < 1000; j++) {
+                    random = ThreadLocalRandom.current().nextInt(0, 100);
+                    if (random > p*100) {
+                        query = ThreadLocalRandom.current().nextInt(1, numKeys);
+                    } else {
+                        query = queryKeys[tossCoin()];
+                    }
+
+                    restHold = rest.find(query);
+                    bstHold = bst.find(query);
+                    splayHold = splayTree.find(query);
+
+                    if (restHold*bstHold*splayHold > 0) {
+                        restTotal += restHold;
+                        splayTotal += splayHold;
+                        bstTotal += bstHold;
+                        
+                        if (restHold > restMax) restMax = restHold;
+                        if (splayHold > splayMax) splayMax = splayHold;
+                        if (bstHold > bstMax) bstMax = bstHold;
+                            
+                    } else {
+                        System.out.format("error: %d not in tree", query);
+                        return;
+                    }   
                 }
-
-                restHold = rest.find(query);
-                bstHold = bst.find(query);
-                splayHold = splayTree.find(query);
-
-                if (restHold*bstHold*splayHold > 0) {
-                    line = String.format("%d,%d,%d\n", restHold, splayHold, bstHold);
-                    fw.append(line);
-
-                    restTotal += restHold;
-                    splayTotal += splayHold;
-                    bstTotal += bstHold;
-                } else {
-                    System.out.format("error: %d not in tree", query);
-                    return;
-                }
+                
+                line = String.format("%d,%d,%d,%d\n", i*1000, restMax, splayMax, bstMax);
+                fw.append(line);
+                
+                restMax = 0;
+                splayMax = 0;
+                bstMax = 0;
             }
             
             fw.flush();

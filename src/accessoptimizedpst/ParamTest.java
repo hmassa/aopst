@@ -44,7 +44,7 @@ public class ParamTest extends Test{
             queryKeys[i] = keys.get(i);
         }
 
-        numQueries = 10000000;
+        numQueries = 1000000000;
     }
     
     @Override

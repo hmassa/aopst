@@ -14,15 +14,15 @@ public class AccessOptimizedPST{
 //        test.setKeySize(1000);
 //        test.run();
         
-        test.setKeySize(10000);
-        test.run();
+//        test.setKeySize(10000);
+//        test.run();
         
 //        test.setKeySize(100000);
 //        test.run();
         
-//        test.setKeySize(1000000);
-//        test.run();
-        
+        test.setKeySize(1000000);
+        test.run();
+//        
         System.out.println("");
         
         NumberFormat nf = NumberFormat.getInstance();
