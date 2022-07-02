@@ -1,0 +1,411 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2021.10.5)  2 JUL 2022 15:44
+entering extended mode
+ restricted \write18 enabled.
+ file:line:error style messages enabled.
+ %&-line parsing enabled.
+**AAPST-Latest.tex
+(./AAPST-Latest.tex
+LaTeX2e <2020-10-01> patch level 4
+L3 programming layer <2021-02-18>
+(/usr/local/texlive/2021/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2020/04/10 v1.4m Standard LaTeX document class
+(/usr/local/texlive/2021/texmf-dist/tex/latex/base/size10.clo
+File: size10.clo 2020/04/10 v1.4m Standard LaTeX file (size option)
+)
+\c@part=\count179
+\c@section=\count180
+\c@subsection=\count181
+\c@subsubsection=\count182
+\c@paragraph=\count183
+\c@subparagraph=\count184
+\c@figure=\count185
+\c@table=\count186
+\abovecaptionskip=\skip47
+\belowcaptionskip=\skip48
+\bibindent=\dimen138
+)
+(/usr/local/texlive/2021/texmf-dist/tex/latex/base/inputenc.sty
+Package: inputenc 2020/08/01 v1.3d Input encoding file
+\inpenc@prehook=\toks15
+\inpenc@posthook=\toks16
+)
+(/usr/local/texlive/2021/texmf-dist/tex/latex/titling/titling.sty
+Package: titling 2009/09/04 v2.1d maketitle typesetting
+\thanksmarkwidth=\skip49
+\thanksmargin=\skip50
+\droptitle=\skip51
+)
+(/usr/local/texlive/2021/texmf-dist/tex/latex/lipsum/lipsum.sty
+(/usr/local/texlive/2021/texmf-dist/tex/latex/l3kernel/expl3.sty
+Package: expl3 2021-02-18 L3 programming layer (loader) 
+
+(/usr/local/texlive/2021/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
+File: l3backend-pdftex.def 2021-03-18 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count187
+\l__pdf_internal_box=\box47
+))
+(/usr/local/texlive/2021/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
+(/usr/local/texlive/2021/texmf-dist/tex/latex/l3packages/xparse/xparse-2020-10-
+01.sty
+(/usr/local/texlive/2021/texmf-dist/tex/latex/l3packages/xparse/xparse-generic.
+tex)))
+Package: lipsum 2021-03-03 v2.3 150 paragraphs of Lorem Ipsum dummy text
+ (/usr/local/texlive/2021/texmf-dist/tex/latex/lipsum/lipsum.ltd.tex
+File: lipsum.ltd.tex 2021-03-03 v2.3 The Lorem ipsum dummy text
+))
+(/usr/local/texlive/2021/texmf-dist/tex/latex/grffile/grffile.sty
+Package: grffile 2019/11/11 v2.1 Extended file name support for graphics (legac
+y)
+Package grffile Info: This package is an empty stub for compatibility on input 
+line 40.
+
+(/usr/local/texlive/2021/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2020/09/09 v1.2b Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/local/texlive/2021/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks17
+)
+(/usr/local/texlive/2021/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2020/08/30 v1.4c Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/local/texlive/2021/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+)
+(/usr/local/texlive/2021/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 105.
+
+(/usr/local/texlive/2021/texmf-dist/tex/latex/graphics-def/pdftex.def
+File: pdftex.def 2020/10/05 v1.2a Graphics/color driver for pdftex
+))
+\Gin@req@height=\dimen139
+\Gin@req@width=\dimen140
+))
+(/usr/local/texlive/2021/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip16
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+(/usr/local/texlive/2021/texmf-dist/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2020/09/23 v2.17i AMS math features
+\@mathmargin=\skip52
+
+For additional information on amsmath, use the `?' option.
+(/usr/local/texlive/2021/texmf-dist/tex/latex/amsmath/amstext.sty
+Package: amstext 2000/06/29 v2.01 AMS text
+
+(/usr/local/texlive/2021/texmf-dist/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks18
+\ex@=\dimen141
+))
+(/usr/local/texlive/2021/texmf-dist/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+\pmbraise@=\dimen142
+)
+(/usr/local/texlive/2021/texmf-dist/tex/latex/amsmath/amsopn.sty
+Package: amsopn 2016/03/08 v2.02 operator names
+)
+\inf@bad=\count188
+LaTeX Info: Redefining \frac on input line 234.
+\uproot@=\count189
+\leftroot@=\count190
+LaTeX Info: Redefining \overline on input line 399.
+\classnum@=\count191
+\DOTSCASE@=\count192
+LaTeX Info: Redefining \ldots on input line 496.
+LaTeX Info: Redefining \dots on input line 499.
+LaTeX Info: Redefining \cdots on input line 620.
+\Mathstrutbox@=\box48
+\strutbox@=\box49
+\big@size=\dimen143
+LaTeX Font Info:    Redeclaring font encoding OML on input line 743.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 744.
+\macc@depth=\count193
+\c@MaxMatrixCols=\count194
+\dotsspace@=\muskip17
+\c@parentequation=\count195
+\dspbrk@lvl=\count196
+\tag@help=\toks19
+\row@=\count197
+\column@=\count198
+\maxfields@=\count199
+\andhelp@=\toks20
+\eqnshift@=\dimen144
+\alignsep@=\dimen145
+\tagshift@=\dimen146
+\tagwidth@=\dimen147
+\totwidth@=\dimen148
+\lineht@=\dimen149
+\@envbody=\toks21
+\multlinegap=\skip53
+\multlinetaggap=\skip54
+\mathdisplay@stack=\toks22
+LaTeX Info: Redefining \[ on input line 2923.
+LaTeX Info: Redefining \] on input line 2924.
+)
+(/usr/local/texlive/2021/texmf-dist/tex/latex/amsfonts/amssymb.sty
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+
+(/usr/local/texlive/2021/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+))
+(/usr/local/texlive/2021/texmf-dist/tex/latex/multirow/multirow.sty
+Package: multirow 2021/03/15 v2.8 Span multiple rows of a table
+\multirow@colwidth=\skip55
+\multirow@cntb=\count266
+\multirow@dima=\skip56
+\bigstrutjot=\dimen150
+)
+(/usr/local/texlive/2021/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count267
+\float@exts=\toks23
+\float@box=\box50
+\@float@everytoks=\toks24
+\@floatcapt=\box51
+)
+(/usr/local/texlive/2021/texmf-dist/tex/latex/zlmtt/zlmtt.sty
+Package: zlmtt 2019/06/11 v1.02 Alternate support package for Latin Modern Type
+Writer
+
+(/usr/local/texlive/2021/texmf-dist/tex/latex/xkeyval/xkeyval.sty
+Package: xkeyval 2020/11/20 v2.8 package option processing (HA)
+
+(/usr/local/texlive/2021/texmf-dist/tex/generic/xkeyval/xkeyval.tex
+(/usr/local/texlive/2021/texmf-dist/tex/generic/xkeyval/xkvutils.tex
+\XKV@toks=\toks25
+\XKV@tempa@toks=\toks26
+)
+\XKV@depth=\count268
+File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
+)))
+(./AAPST-Latest.aux)
+\openout1 = `AAPST-Latest.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+
+(/usr/local/texlive/2021/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count269
+\scratchdimen=\dimen151
+\scratchbox=\box52
+\nofMPsegments=\count270
+\nofMParguments=\count271
+\everyMPshowfont=\toks27
+\MPscratchCnt=\count272
+\MPscratchDim=\dimen152
+\MPnumerator=\count273
+\makeMPintoPDFobject=\count274
+\everyMPtoPDFconversion=\toks28
+) (/usr/local/texlive/2021/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+85.
+
+(/usr/local/texlive/2021/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
+LaTeX Font Info:    Trying to load font information for U+msa on input line 42.
+
+
+(/usr/local/texlive/2021/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 42.
+
+
+(/usr/local/texlive/2021/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+Underfull \hbox (badness 10000) in paragraph at lines 45--48
+
+ []
+
+[1
+
+{/usr/local/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+LaTeX Font Info:    Trying to load font information for OT1+zlmvtt on input lin
+e 56.
+
+(/usr/local/texlive/2021/texmf-dist/tex/latex/zlmtt/ot1zlmvtt.fd
+File: ot1zlmvtt.fd 2014/02/07 v1.0 Alternate font definitions for Latin Modern 
+Typewriter, Michael Sharpe
+)
+LaTeX Font Info:    Font shape `OT1/zlmvtt/m/n' will be
+(Font)              scaled to size 11.00006pt on input line 56.
+ [2] [3]
+[4]
+<starting_tree.jpg, id=33, 489.83pt x 355.3275pt>
+File: starting_tree.jpg Graphic file (type jpg)
+<use starting_tree.jpg>
+Package pdftex.def Info: starting_tree.jpg  used on input line 127.
+(pdftex.def)             Requested size: 139.7231pt x 101.35612pt.
+<query_1.jpg, id=34, 489.83pt x 357.335pt>
+File: query_1.jpg Graphic file (type jpg)
+<use query_1.jpg>
+Package pdftex.def Info: query_1.jpg  used on input line 136.
+(pdftex.def)             Requested size: 139.7231pt x 101.92877pt.
+<query_2.jpg, id=35, 488.82625pt x 354.32375pt>
+File: query_2.jpg Graphic file (type jpg)
+<use query_2.jpg>
+Package pdftex.def Info: query_2.jpg  used on input line 150.
+(pdftex.def)             Requested size: 124.19725pt x 90.02426pt.
+<query_3.jpg, id=36, 488.82625pt x 354.32375pt>
+File: query_3.jpg Graphic file (type jpg)
+<use query_3.jpg>
+Package pdftex.def Info: query_3.jpg  used on input line 159.
+(pdftex.def)             Requested size: 139.7231pt x 101.27527pt.
+<query_4.jpg, id=37, 488.82625pt x 353.32pt>
+File: query_4.jpg Graphic file (type jpg)
+<use query_4.jpg>
+Package pdftex.def Info: query_4.jpg  used on input line 173.
+(pdftex.def)             Requested size: 139.7231pt x 100.98837pt.
+<query_5.jpg, id=38, 488.82625pt x 354.32375pt>
+File: query_5.jpg Graphic file (type jpg)
+<use query_5.jpg>
+Package pdftex.def Info: query_5.jpg  used on input line 182.
+(pdftex.def)             Requested size: 139.7231pt x 101.27527pt.
+<query_6.jpg, id=39, 489.83pt x 356.33125pt>
+File: query_6.jpg Graphic file (type jpg)
+<use query_6.jpg>
+Package pdftex.def Info: query_6.jpg  used on input line 196.
+(pdftex.def)             Requested size: 139.7231pt x 101.64244pt.
+<query_7.jpg, id=40, 489.83pt x 354.32375pt>
+File: query_7.jpg Graphic file (type jpg)
+<use query_7.jpg>
+Package pdftex.def Info: query_7.jpg  used on input line 205.
+(pdftex.def)             Requested size: 139.7231pt x 101.06981pt.
+ [5] [6 <./starting_tree.jpg> <./query_1.jpg> <./query_2.jpg> <./query_3.jpg>] 
+[7 <./query_4.jpg> <./query_5.jpg> <./query_6.jpg> <./query_7.jpg>]
+<AAp-0.png, id=51, 523.848pt x 370.329pt>
+File: AAp-0.png Graphic file (type png)
+<use AAp-0.png>
+Package pdftex.def Info: AAp-0.png  used on input line 226.
+(pdftex.def)             Requested size: 341.5519pt x 241.45688pt.
+ [8]
+<AAp-25.png, id=56, 523.848pt x 372.3pt>
+File: AAp-25.png Graphic file (type png)
+<use AAp-25.png>
+Package pdftex.def Info: AAp-25.png  used on input line 234.
+(pdftex.def)             Requested size: 341.5519pt x 242.742pt.
+
+[9 <./AAp-0.png>]
+<AAp-5.png, id=62, 526.914pt x 371.205pt>
+File: AAp-5.png Graphic file (type png)
+<use AAp-5.png>
+Package pdftex.def Info: AAp-5.png  used on input line 242.
+(pdftex.def)             Requested size: 341.5519pt x 240.61768pt.
+ [10 <./AAp-25.png>]
+<AAp-75.png, id=67, 525.819pt x 372.3pt>
+File: AAp-75.png Graphic file (type png)
+<use AAp-75.png>
+Package pdftex.def Info: AAp-75.png  used on input line 251.
+(pdftex.def)             Requested size: 341.5519pt x 241.83307pt.
+ [11 <./AAp-5.png>]
+<AAp-1.png, id=72, 525.819pt x 372.3pt>
+File: AAp-1.png Graphic file (type png)
+<use AAp-1.png>
+Package pdftex.def Info: AAp-1.png  used on input line 259.
+(pdftex.def)             Requested size: 341.5519pt x 241.83307pt.
+ [12 <./AAp-75.png>]
+[13 <./AAp-1.png>]
+<maxComp90.png, id=82, 642.4pt x 481.8pt>
+File: maxComp90.png Graphic file (type png)
+<use maxComp90.png>
+Package pdftex.def Info: maxComp90.png  used on input line 279.
+(pdftex.def)             Requested size: 341.5519pt x 256.16881pt.
+ [14]
+<avgComp90.png, id=87, 642.4pt x 481.8pt>
+File: avgComp90.png Graphic file (type png)
+<use avgComp90.png>
+Package pdftex.def Info: avgComp90.png  used on input line 287.
+(pdftex.def)             Requested size: 341.5519pt x 256.16881pt.
+ [15 <./maxComp90.png (PNG copy)>] [16 <./avgComp90.png (PNG copy)>]
+Underfull \hbox (badness 4765) in paragraph at lines 311--314
+[]\OT1/cmr/m/n/10 D.E. Eck-ha-hardt, ``Time-Critical Mul-ti-rate Schedul-ing Us
+-ing Con-
+ []
+
+
+Underfull \hbox (badness 5504) in paragraph at lines 311--314
+\OT1/cmr/m/n/10 tem-po-rary Real-Time Op-er-at-ing Sys-tem Ser-vices,'' NASA Te
+ch-ni-
+ []
+
+
+Underfull \hbox (badness 3396) in paragraph at lines 316--318
+[]\OT1/cmr/m/n/10 J.W. Jor-dan, ``Task Schedul-ing for a Real Time Mul-ti-pro-c
+es-sor,''
+ []
+
+
+Underfull \hbox (badness 3471) in paragraph at lines 316--318
+\OT1/cmr/m/n/10 NASA Tech-ni-cal Note D-5786, Elec-tron-ics Re-search Cen-ter, 
+1970.
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 316--318
+\OT1/cmr/m/n/10 ($\OT1/zlmvtt/m/n/10 https : / / ntrs . nasa . gov / api / cita
+tions / 19700017975 / downloads /
+ []
+
+[17] (./AAPST-Latest.aux) ) 
+Here is how much of TeX's memory you used:
+ 3262 strings out of 478994
+ 47569 string characters out of 5858184
+ 493402 words of memory out of 5000000
+ 20663 multiletter control sequences out of 15000+600000
+ 417451 words of font info for 70 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 83i,11n,88p,1684b,477s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/
+lm/lm-rm.enc}{/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/cm-super/cm-su
+per-ts1.enc}</usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/
+cmbx12.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mbx8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmb
+x9.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi1
+0.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.
+pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pf
+b></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb>
+</usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></
+usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></us
+r/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/l
+ocal/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/loca
+l/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/t
+exlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texl
+ive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texli
+ve/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texliv
+e/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/local/texlive/
+2021/texmf-dist/fonts/type1/public/lm/lmvtt10.pfb></usr/local/texlive/2021/texm
+f-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2021/
+texmf-dist/fonts/type1/public/cm-super/sfrm0600.pfb></usr/local/texlive/2021/te
+xmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb>
+Output written on AAPST-Latest.pdf (17 pages, 1363650 bytes).
+PDF statistics:
+ 163 PDF objects out of 1000 (max. 8388607)
+ 102 compressed objects within 2 object streams
+ 0 named destinations out of 1000 (max. 500000)
+ 76 words of extra memory for PDF output out of 10000 (max. 10000000)
+
