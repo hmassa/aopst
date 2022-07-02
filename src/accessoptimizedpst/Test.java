@@ -14,7 +14,7 @@ public abstract class Test {
     protected ArrayList<Comparable> queries;
     protected String testName;
     protected int numKeys;
-    protected int numQueries;
+    protected long numQueries;
     
     public void createChart() {
         setName();

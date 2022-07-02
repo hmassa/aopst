@@ -21,9 +21,6 @@ public class SplayWorstCase extends Test {
     private int[] queryKeys;
     private double p = 0.9;
     
-    File file;
-    FileWriter fw;
-    
      @Override
     void generateTrees() {
         keys = new ArrayList<>();
@@ -52,7 +49,7 @@ public class SplayWorstCase extends Test {
             queryKeys[i] = keys.get(i);
         }
 
-        numQueries = 100000;
+        numQueries = 1000000000;
     }
     
     @Override
@@ -80,23 +77,29 @@ public class SplayWorstCase extends Test {
     @Override
     public void searchAndWrite() {
         int splayHold, restHold, bstHold;
-        
         int splayMax = 0, restMax = 0, bstMax = 0;
-        
         long splayTotal = 0, restTotal = 0, bstTotal = 0;
-        
+
+        File avgFile, maxFile;
+        FileWriter avgFw, maxFw;
+        int interval = 5000000;
+
         int query;
         int random;
         
         String line;
         
         try {
-            file = new File("C:\\Users\\flipp\\Documents\\CompSci\\Research\\AOPST\\output.txt");
-            fw = new FileWriter(file);
-            fw.write("Count,AAPST,Splay,BST\n");
+            maxFile = new File("./Results/output.txt");
+            maxFw = new FileWriter(maxFile);
+            maxFw.write("Count,AAPST,Splay,BST\n");
+
+            avgFile = new File("./Results/average.txt");
+            avgFw = new FileWriter(avgFile);
+            avgFw.write("Count,AAPST,Splay,BST\n");
             
-            for (int i = 0; i < numQueries/1000; i++) {
-                for (int j = 0; j < 1000; j++) {
+            for (int i = 0; i < numQueries/interval; i++) {
+                for (int j = 0; j < interval; j++) {
                     random = ThreadLocalRandom.current().nextInt(0, 100);
                     if (random > p*100) {
                         query = ThreadLocalRandom.current().nextInt(1, numKeys);
@@ -123,27 +126,26 @@ public class SplayWorstCase extends Test {
                     }   
                 }
                 
-                line = String.format("%d,%d,%d,%d\n", i*1000, restMax, splayMax, bstMax);
-                fw.append(line);
-                
-                restMax = 0;
-                splayMax = 0;
-                bstMax = 0;
+                line = String.format("%d,%d,%d,%d\n", i*interval, restMax, splayMax, bstMax);
+                maxFw.append(line);
+
+                line = String.format("%d,%.2f,%.2f,%.2f\n", i*interval, (float) restTotal/interval, (float) splayTotal/interval, (float) bstTotal/interval);
+                avgFw.append(line);
+
+                restMax = splayMax = bstMax = 0;
+                restTotal = splayTotal = bstTotal = 0;
             }
             
-            fw.flush();
-            fw.close();
+            maxFw.flush();
+            maxFw.close();
+
+            avgFw.flush();
+            avgFw.close();
             
         } catch (IOException ex) {
-            System.out.println("Oopsies");
+            System.out.println(ex);
         }
 
-        float restAvg = (float)restTotal/(numQueries);
-        float bstAvg = (float)bstTotal/(numQueries);
-        float splayAvg = (float)splayTotal/(numQueries);
-        
-        String dbSize = Integer.toString(numKeys/1000) + "k";
-        System.out.printf("%-9s|%-9.5f|%-9.5f|%-9.5f|\n", dbSize, splayAvg, restAvg, bstAvg);
         System.out.println("_________|_________|_________|_________|");
     }
 }

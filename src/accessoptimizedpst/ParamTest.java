@@ -44,7 +44,7 @@ public class ParamTest extends Test{
             queryKeys[i] = keys.get(i);
         }
 
-        numQueries = 1000000000;
+        numQueries = 1000000000L;
     }
     
     @Override
@@ -85,7 +85,7 @@ public class ParamTest extends Test{
         for (int i = 0; i < numQueries; i++) {
             random = ThreadLocalRandom.current().nextInt(0, 100);
             if (random > p*100) {
-                query = ThreadLocalRandom.current().nextInt(0, numKeys);
+                query = ThreadLocalRandom.current().nextInt(1, numKeys+1);
             } else {
                 query = queryKeys[tossCoin()];
             }
@@ -99,7 +99,7 @@ public class ParamTest extends Test{
                 splayTotal += splayHold;
                 bstTotal += bstHold;
             } else {
-                System.out.println("error: not in tree");
+                System.out.println("error: " + query + " not in tree");
                 return;
             }
         }

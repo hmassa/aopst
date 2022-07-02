@@ -7,26 +7,11 @@ import java.text.NumberFormat;
  */
 public class AccessOptimizedPST{
     public static void main(String[] args) throws IOException{
-        Test test = new SplayWorstCase();    // ParamTest();
-        
-        test.createChart();
-        
-//        test.setKeySize(1000);
-//        test.run();
-        
-//        test.setKeySize(10000);
-//        test.run();
-        
-//        test.setKeySize(100000);
-//        test.run();
-        
-        test.setKeySize(1000000);
-        test.run();
-//        
-        System.out.println("");
-        
-        NumberFormat nf = NumberFormat.getInstance();
-        System.out.println("*Averaged over " + nf.format(test.numQueries) + " queries");    
+        Test test = new SplayWorstCase();
 
+        test.createChart();
+
+        test.setKeySize(100000);
+        test.run();
     }
 }

@@ -62,7 +62,7 @@ public class RestructuringAOPST implements Tree{
         PointerPSTNode node = this.root;
         int diff;
 	
-        while (node != null){
+        while (node != null) {
             if (node.validP) {
                 diff = xCompare(xVal, node.px);
                 if (diff == 0) {
@@ -70,7 +70,7 @@ public class RestructuringAOPST implements Tree{
                     return count;
                 }
             }
-            
+
             diff = xCompare(xVal, node.qx);
 
             if (diff == 0) {
@@ -92,24 +92,25 @@ public class RestructuringAOPST implements Tree{
         if (p) {
             node.py++;
 
-            if (node.parent == null || yCompare(node.py, node.parent.py) <= 0) {
+            if (node.parent == null || yCompare(node.py, node.parent.py) <= 0)
                 return;
-            }
             
             xHold = node.px;
             yHold = node.py;
             deleteP(node);
         } else {
-            if (node.parent == null) {
-                return;
-            }
-            
             node.qy++;
+            if (node.parent == null)
+                return;
+
+            if (node.parent.validP && yCompare(node.qy, node.parent.py) <= 0)
+                return;
+
             xHold = node.qx;
             yHold = node.qy;
         } 
         
-        insertP(xHold, yHold);
+        insertP(xHold, yHold, node.parent);
     }
     
     private void deleteP(PointerPSTNode node){
@@ -172,40 +173,41 @@ public class RestructuringAOPST implements Tree{
         }
     }
     
-    private void insertP(Comparable xVal, int yVal){
+    private void insertP(Comparable xVal, int yVal, PointerPSTNode node) {
         Comparable xHold;
         int yHold;
-        
-        PointerPSTNode node = this.root;
-        while(true) {
-            if (!node.validP){
-                node.px = xVal;
-                node.py = yVal;
-                node.validP = true;
-                break;
-            }
-            
-            int y_diff = yCompare(yVal, node.py);
-            if (y_diff > 0) {
-                xHold = node.px;
-                yHold = node.py;
-                node.px = xVal;
-                node.py = yVal;
-                xVal = xHold;
-                yVal = yHold;
-            }
-            
-            int x_diff = xCompare(xVal, node.qx);
+        int xDiff;
 
-            if (x_diff > 0)
+        while (node.parent != null && !node.parent.validP) {
+            node = node.parent;
+        }
+
+        while (node.parent != null && yCompare(yVal, node.parent.py) > 0) {
+            node = node.parent;
+        }
+
+        while (node.validP) {
+            xHold = node.px;
+            yHold = node.py;
+            node.px = xVal;
+            node.py = yVal;
+            xVal  = xHold;
+            yVal = yHold;
+
+            xDiff = xCompare(xVal, node.qx);
+            if (xDiff > 0) {
                 node = node.right;
-            else if (x_diff < 0) 
+            } else if (xDiff < 0) {
                 node = node.left;
-            else{
+            } else {
                 node.qy = yVal;
-                break;
+                return;
             }
         }
+
+        node.px = xVal;
+        node.py = yVal;
+        node.validP = true;
     }
     
     private int xCompare(Comparable a, Comparable b) {
