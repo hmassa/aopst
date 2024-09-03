@@ -205,9 +205,14 @@ public class RestructuringAOPST implements Tree{
             }
         }
 
-        node.px = xVal;
-        node.py = yVal;
-        node.validP = true;
+        xDiff = xCompare(node.qx, xVal);
+        if (xDiff != 0) {
+            node.px = xVal;
+            node.py = yVal;
+            node.validP = true;
+        } else {
+            node.qy = yVal;
+        }
     }
     
     private int xCompare(Comparable a, Comparable b) {

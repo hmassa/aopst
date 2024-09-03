@@ -9,13 +9,10 @@ public class DemoTest extends Test {
     @Override
     void generateQueries() {
         queries = new ArrayList<>(6);
+        queries.add(6);
+        queries.add(5);
         queries.add(5);
         queries.add(7);
-        queries.add(7);
-        queries.add(2);
-        queries.add(7);
-        queries.add(3);
-        queries.add(5);
     }
 
     @Override
@@ -30,7 +27,7 @@ public class DemoTest extends Test {
 
     @Override
     void searchAndWrite() {
-        for (int i = 0; i < 7; i++) {
+        for (int i = 0; i < 4; i++) {
             Comparable query = (Comparable) queries.get(i);
             int count = rest.find(query);
             System.out.println("Query: " + query + "  Count: " + count + "\n");
